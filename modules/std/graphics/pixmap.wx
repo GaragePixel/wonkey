@@ -30,12 +30,6 @@ Namespace std.graphics
 	across desktop, mobile, and embedded platforms.
 #end
 
-#Import "<std.memory>"
-#Import "<std.geom>"
-#Import "<std.resource>"
-#Import "<std.filesystem>"
-#Import "<std.async>"
-
 Using std.memory
 Using std.geom
 Using std.resource
