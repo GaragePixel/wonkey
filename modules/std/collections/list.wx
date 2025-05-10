@@ -345,7 +345,7 @@ Class List<T> Implements IContainer<T>
 	@return The number of values in the list.
 	
 	#end
-	Method Count:Int()
+	Method Count:UInt() 'iDkP: UNSIGNED 32 bits!
 		Local node:=_head._succ,n:=0
 		While node<>_head
 			node=node._succ
@@ -903,7 +903,7 @@ Class List<T> Implements IContainer<T>
 
 	#rem wonkeydoc Make the items (any custom type accepted) of the list unique, keep the original order.
 
-	@param onPlace If False, return a copy of the List
+	@param onPlace if False, return a copy of the List
 
 	@return Copy of the list or Null
 
@@ -944,7 +944,7 @@ Class List<T> Implements IContainer<T>
 		
 		'Speed up
 		Local lastHead:=lastNode '32 bits - used to stick the head on the last duplicate detected
-		Local lastCnt:UInt '32 bits - used to calculate the head from the number of programmed deletions
+		Local lastCnt:UInt '32 bits - used to calculate the head from the number of planned deletions
 
 		Repeat
 
@@ -975,9 +975,9 @@ Class List<T> Implements IContainer<T>
 				Repeat
 					'same than above, we need to compare the node's value, where T could be from any type
 					If node.Value=nodeItem.Value
-						node=node.Pred
-						occurance-=1
+						node=node.Pred						
 						node.Succ.Remove()
+						occurance-=1
 						actCount-=1
 						op-=1
 						lp-=1
@@ -986,7 +986,7 @@ Class List<T> Implements IContainer<T>
 					node=node.Pred
 					op-=1
 
-				Until op=1 Or occurance=1 'Stop without checking the whole list if we know it was the last one
+				Until op=1 Or occurance=1 'Stop without checking the whole list if we know it was the last one duplicate
 
 			End 
 
@@ -999,8 +999,11 @@ Class List<T> Implements IContainer<T>
 	End
 
 	#rem wonkeydoc Finds the first node in the list containing a value.
+
 	@param value The value to find.
+
 	@return The first node containing the value, or null if the value was not found.
+
 	#end	
 	Method Contains:Node( value:T ) 'Added by iDkP from GaragePixel
 		'iDkP: Added as sugar for front-end consistance with map
@@ -1008,8 +1011,11 @@ Class List<T> Implements IContainer<T>
 	End
 
 	#rem wonkeydoc Add each keys from this (param) to self
-	@param This The list to compare.
+
+	@param This is the list to compare.
+
 	@param onPlace if False, returns a copy of the list, else nothing
+
 	#end
 	Method Append:List<T>(this:List<T>,onPlace:Bool=True) 'Added by iDkP from GaragePixel
 		'Sugar
@@ -1047,7 +1053,7 @@ Class List<T> Implements IContainer<T>
 		'		Source red-black tree: https://en.wikipedia.org/wiki/Red%E2%80%93black_tree
 		'
 		' 	This method only takes internal type because:
-		' 		- To make a key from map, the type must be an internal type, not a custom type,
+		' 		- To make a key from map, the type must be an internal type, not a custom type
 		'
 		If onPlace 
 			Self.AddAll(this)
@@ -1166,7 +1172,7 @@ Class List<T> Implements IContainer<T>
 
 	#rem wonkeydoc Keep all keys from self that exist in this (param)
 
-	@param This The list to compare.
+	@param This is the list to compare.
 
 	@param onPlace if False, returns a copy of the list, else nothing
 
@@ -1188,7 +1194,7 @@ Class List<T> Implements IContainer<T>
 
 	#rem wonkeydoc Remove all keys from self that exist in this (param)
 
-	@param This The list to compare.
+	@param This is the list to compare.
 
 	@param onPlace if False, returns a copy of the list, else nothing
 
