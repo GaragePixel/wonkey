@@ -1,5 +1,5 @@
 
-Namespace std.collections
+Namespace stdlib.collections
 
 #rem wonkeydoc Convenience type alias for Stack\<Int\>.
 #end
@@ -13,7 +13,10 @@ Alias FloatStack:Stack<Float>
 #end
 Alias StringStack:Stack<String>
 
-#rem wonkeydoc The Stack class provides suport for dynamic arrays.
+Alias StackSortFilter:Variant 	' A variant you can pass trough the Sort function.
+								' See the Sort With Filter extension by iDkP from GaragePixel
+
+#rem wonkeydoc The Stack class provides support for dynamic arrays.
 
 A stack is an 'array like' container that grows dynamically as necessary.
 
@@ -869,5 +872,5 @@ Class Stack<T> Implements IContainer<T>
 
 		Sort( filter,compare,lo,y )
 		Sort( filter,compare,x,hi )
-	End	
+	End
 End
