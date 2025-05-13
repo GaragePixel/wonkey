@@ -1,5 +1,5 @@
 
-Namespace stdlib.collections
+Namespace std.collections
 
 #rem wonkeydoc Convenience type alias for Map\<Int,V\>.
 #end
