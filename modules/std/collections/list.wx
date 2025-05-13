@@ -1,5 +1,5 @@
 
-Namespace stdlib.collections
+Namespace std.collections
 
 #rem wonkeydoc Convenience type alias for List\<Int\>.
 #end
