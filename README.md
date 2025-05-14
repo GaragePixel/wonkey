@@ -1,12 +1,12 @@
 ![Views](https://views.whatilearened.today/views/github/wonkey-coders/wonkey.svg)
-![windows](https://github.com/wonkey-coders/wonkey/workflows/windows/badge.svg?branch=develop)
-![linux](https://github.com/wonkey-coders/wonkey/workflows/linux/badge.svg?branch=develop)
-![macos](https://github.com/wonkey-coders/wonkey/workflows/macos/badge.svg?branch=develop)
-![emscripten](https://github.com/wonkey-coders/wonkey/workflows/emscripten/badge.svg?branch=develop)
-![ios](https://github.com/wonkey-coders/wonkey/workflows/ios/badge.svg?branch=develop)
-![android](https://github.com/wonkey-coders/wonkey/workflows/android/badge.svg?branch=develop)
-<!--![raspbian](https://github.com/wonkey-coders/wonkey/workflows/raspbian/badge.svg?branch=develop)-->
-<!--- [![Travis CI](https://travis-ci.org/wonkey-coders/wonkey.svg?branch=develop)](https://travis-ci.org/wonkey-coders/wonkey) --->
+![windows](https://github.com/wonkey-coders/wonkey/workflows/windows/badge.svg)
+![linux](https://github.com/wonkey-coders/wonkey/workflows/linux/badge.svg)
+![macos](https://github.com/wonkey-coders/wonkey/workflows/macos/badge.svg)
+![emscripten](https://github.com/wonkey-coders/wonkey/workflows/emscripten/badge.svg)
+![ios](https://github.com/wonkey-coders/wonkey/workflows/ios/badge.svg)
+![android](https://github.com/wonkey-coders/wonkey/workflows/android/badge.svg)
+<!--![raspbian](https://github.com/wonkey-coders/wonkey/workflows/raspbian/badge.svg)-->
+<!--- [![Travis CI](https://travis-ci.org/wonkey-coders/wonkey.svg)](https://travis-ci.org/wonkey-coders/wonkey) --->
 
 <div align="center">
 	<h1>Wonkey</h1>
