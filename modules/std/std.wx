@@ -50,6 +50,8 @@ Namespace std
 #Import "geom/vec3"
 #Import "geom/vec4"
 
+#Import "geom/rect9"
+
 #Import "geom/plane"
 #Import "geom/box"
 #Import "geom/line"
