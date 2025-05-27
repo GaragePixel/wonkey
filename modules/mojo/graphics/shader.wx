@@ -14,12 +14,9 @@ Const A_TANGENT:=5
 Const A_WEIGHTS:=6
 Const A_BONES:=7
 
-'jl added
-'------------------------------------------------------------
-Const A_COLOR2:=8
-Const A_XYZPOSITION:=9
-Const A_COLOR3:=10
-'------------------------------------------------------------
+Const A_COLOR2:=8 'jl added
+Const A_XYZPOSITION:=9 'jl added
+Const A_COLOR3:=10 'jl added
 
 Private
 
@@ -313,10 +310,11 @@ Class Shader
 		Return GetShader( name,defs )
 	End
 
-'jl added
-'------------------------------------------------------------
 	#rem wonkeydoc Loads a shader with a given name.
-	#end	
+	@author jp
+	@author iDkP from Garagepixel (documentation 2025-05-27)
+	@since 2021-01-13
+	#end
 	Function Load:Shader( name:String, defs:String="" )
 '		Return GetShader( name, defs )
 		local nm:string = StripExt( StripDir(name) )
@@ -485,13 +483,9 @@ Class Shader
 			glBindAttribLocation( glprogram,A_TANGENT,"a_Tangent" )
 			glBindAttribLocation( glprogram,A_WEIGHTS,"a_Weights" )
 			glBindAttribLocation( glprogram,A_BONES,"a_Bones" )
-
-'jl added
-'------------------------------------------------------------			
-			glBindAttribLocation( glprogram,A_COLOR2,"a_Color2" )
-			glBindAttribLocation( glprogram,A_COLOR3,"a_Color3" )
-			glBindAttribLocation( glprogram,A_XYZPOSITION,"a_XYZPosition" )
-'------------------------------------------------------------
+			glBindAttribLocation( glprogram,A_COLOR2,"a_Color2" ) 'jl added
+			glBindAttribLocation( glprogram,A_COLOR3,"a_Color3" ) 'jl added
+			glBindAttribLocation( glprogram,A_XYZPOSITION,"a_XYZPosition" ) 'jl added
 			
 			glLink( glprogram )
 			
