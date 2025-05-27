@@ -78,6 +78,7 @@ Class Vertex2fFormat Extends VertexFormat
 '------------------------------------------------------------
 
 		'Need these to shut up android emulator.
+		'iDkP: TODO see if these elements should be added-target-conditioned?
 		glDisableVertexAttribArray( A_NORMAL )
 		glDisableVertexAttribArray( A_TANGENT )
 		glDisableVertexAttribArray( A_WEIGHTS )
