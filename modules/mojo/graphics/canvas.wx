@@ -4127,7 +4127,7 @@ Class Canvas
 		Field shader:Shader
 		Field material:UniformBlock
 		Field blendMode:BlendMode
-		Field colorMask:ColorMask
+		Field colorMask:ColorMask 'jl added
 		Field primOrder:Int
 		Field primCount:Int
 		Field primOffset:Int
@@ -4178,7 +4178,7 @@ Class Canvas
 	
 	Field _retroMode:Bool
 	Field _blendMode:BlendMode
-	Field _colorMask:ColorMask
+	Field _colorMask:ColorMask 'jl added
 	Field _font:Font
 	Field _alpha:Float
 	Field _color:Color
@@ -4513,7 +4513,7 @@ Class Canvas
 			_drawOp.shader=shader
 			_drawOp.material=material
 			_drawOp.blendMode=blendMode
-			_drawOp.colorMask=_colorMask
+			_drawOp.colorMask=_colorMask 'jl added
 			_drawOp.primOrder=primOrder
 			_drawOp.primCount=primCount
 			_drawOp.primOffset=_drawNV
@@ -4593,7 +4593,7 @@ Class Canvas
 		
 			_device.Shader=shader
 			_device.BlendMode=op.blendMode
-			_device.ColorMask=op.colorMask
+			_device.ColorMask=op.colorMask 'jl added
 			_device.BindUniformBlock( op.material )
 
 			Select op.primOrder
