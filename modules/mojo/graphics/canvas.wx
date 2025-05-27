@@ -1,22 +1,19 @@
 
 Namespace mojo.graphics
 
-'jl added
-'------------------------------------------------------------
-'
-' Note: jl math functions moved to wonkey.math
-
 #rem wonkeydoc Converts 4 bytes or ints to a packed integer color
+@author jl
+@since 2021-01-28
 Get an integer packed color from rgba inputs (0..255)
 #end
 function ICol:Uint( r:int, g:int, b:int, a:int = 255 )
+	'Note: (TODO) jl math functions moved to wonkey.math
 	r = Clamp(r, 0, 255)
 	g = Clamp(g, 0, 255)
 	b = Clamp(b, 0, 255)
 	a = Clamp(a, 0, 255)
 	Return UInt(a) Shl 24 | UInt(b) Shl 16 | UInt(g) Shl 8 | UInt(r)
 End function
-'------------------------------------------------------------
 
 
 #rem wonkeydoc Outline modes.
@@ -3581,16 +3578,17 @@ Class Canvas
 	@param sy Y axis scale factor for drawing.
 	@param sv X/Y scale factor for drawing.
 	#end
-	Method DrawImage( image:Image, tx:Float, ty:Float, shader:Shader = null )
+	'Method DrawImage( image:Image, tx:Float, ty:Float, shader:Shader = null )
+	Method DrawImage( image:Image, tx:Float, ty:Float, shader:Shader ) 'iDkP Note: Forced Overload -> avoids branch test
 	
 		Local vs:=image.Vertices
 		Local ts:=image.TexCoords
 		
-		If shader Then
+'		If shader Then
 			AddDrawOp( shader, image.Material, image.BlendMode,4,1 )
-		Else
-			AddDrawOp( image.Shader, image.Material, image.BlendMode,4,1 )
-		End If
+'		Else
+'			AddDrawOp( image.Shader, image.Material, image.BlendMode,4,1 )
+'		End If
 		
 		AddVertex( vs.min.x+tx,vs.min.y+ty,ts.min.x,ts.min.y )
 		AddVertex( vs.max.x+tx,vs.min.y+ty,ts.max.x,ts.min.y )
@@ -3633,7 +3631,7 @@ Class Canvas
 '		DrawImage( image, tv.x,tv.y,rz, sv.x,sv.y )
 	End
 #rem
-	Method DrawImage( image:Image,tx:Float,ty:Float )
+	Method DrawImage( image:Image,tx:Float,ty:Float ) 'iDkP here, forced overload -> no branch test
 	
 		Local vs:=image.Vertices
 		Local ts:=image.TexCoords
@@ -3679,19 +3677,12 @@ Class Canvas
 '------------------------------------------------------------
 
 	#rem wonkeydoc Draws text.
-
 	Draws text using the current [[Color]], [[BlendMode]] and [[Matrix]].
-
 	@param text The text to draw.
-
 	@param tx X coordinate to draw text at.
-
 	@param ty Y coordinate to draw text at.
-
 	@param handleX X handle for drawing.
-
 	@param handleY Y handle for drawing.
-
 	#end
 	Method DrawText( text:String,tx:Float,ty:Float,handleX:Float=0,handleY:Float=0 )
 	
