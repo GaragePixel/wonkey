@@ -3565,7 +3565,12 @@ Class Canvas
 			Endif
 		Endif
 	End
-	
+
+#rem 
+
+	iDkP:
+	Issue: why explicit overloading do not works?
+
 'jl modified
 '------------------------------------------------------------
 	#rem wonkeydoc Draws an image.
@@ -3607,6 +3612,39 @@ Class Canvas
 		Local ts:=image.TexCoords
 		
 		AddDrawOp( image.Shader,image.Material,image.BlendMode,4,1 )
+		
+		AddVertex( vs.min.x+tx,vs.min.y+ty,ts.min.x,ts.min.y )
+		AddVertex( vs.max.x+tx,vs.min.y+ty,ts.max.x,ts.min.y )
+		AddVertex( vs.max.x+tx,vs.max.y+ty,ts.max.x,ts.max.y )
+		AddVertex( vs.min.x+tx,vs.max.y+ty,ts.min.x,ts.max.y )
+		
+		If _lighting And image.ShadowCaster
+			AddShadowCaster( image.ShadowCaster,tx,ty )
+		Endif
+	End
+#end - End issue question
+
+	#rem wonkeydoc Draws an image.
+	@note jl modified
+	Draws an image using the current [[Color]], [[BlendMode]] and [[Matrix]].
+	@param tx X coordinate to draw image at.
+	@param ty Y coordinate to draw image at.
+	@param tv X/Y coordinates to draw image at.
+	@param rz Rotation angle, in radians, for drawing.
+	@param sx X axis scale factor for drawing.
+	@param sy Y axis scale factor for drawing.
+	@param sv X/Y scale factor for drawing.
+	#end
+	Method DrawImage( image:Image, tx:Float, ty:Float, shader:Shader = null ) 'Working version
+	
+		Local vs:=image.Vertices
+		Local ts:=image.TexCoords
+		
+		If shader
+			AddDrawOp( shader, image.Material, image.BlendMode,4,1 )
+		Else
+			AddDrawOp( image.Shader, image.Material, image.BlendMode,4,1 )
+		End If
 		
 		AddVertex( vs.min.x+tx,vs.min.y+ty,ts.min.x,ts.min.y )
 		AddVertex( vs.max.x+tx,vs.min.y+ty,ts.max.x,ts.min.y )
