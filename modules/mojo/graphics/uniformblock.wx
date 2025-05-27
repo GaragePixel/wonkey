@@ -5,7 +5,7 @@ Namespace mojo.graphics
 '------------------------------------------------------------
 Global UserUniforms:Stack<UserUniform> = New Stack<UserUniform> 'jl added
 
-#rem monkeydoc UserUniform
+#rem wonkeydoc UserUniform
 @author jean_luc - jl (seyhajin)
 @author iDkP from GaragePixel (documentation)
 @since 2021-01-13
@@ -45,7 +45,7 @@ Class UserUniform
 	End
 End
 
-#rem monkeydoc AddUserUniform
+#rem wonkeydoc AddUserUniform
 @author jean_luc - jl (seyhajin)
 @since 2021-01-13
 #end
