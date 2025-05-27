@@ -3578,18 +3578,18 @@ Class Canvas
 	@param sy Y axis scale factor for drawing.
 	@param sv X/Y scale factor for drawing.
 	#end
-	Method DrawImage( image:Image, tx:Float, ty:Float, shader:Shader = null )
-	'Method DrawImage( image:Image, tx:Float, ty:Float, shader:Shader ) 'iDkP Note: Forced Overload -> avoids branch test
-	'iDkP: TMP reversed (haven't seen the x,y,z 3 composants in the next DrawImage overload)
+	'Method DrawImage( image:Image, tx:Float, ty:Float, shader:Shader = null )
+	Method DrawImage( image:Image, tx:Float, ty:Float, shader:Shader ) 'iDkP Note: Forced Overload -> avoids branch test
+	'FIXED?
 	
 		Local vs:=image.Vertices
 		Local ts:=image.TexCoords
 		
-		If shader Then
+'		If shader
 			AddDrawOp( shader, image.Material, image.BlendMode,4,1 )
-		Else
-			AddDrawOp( image.Shader, image.Material, image.BlendMode,4,1 )
-		End If
+'		Else
+'			AddDrawOp( image.Shader, image.Material, image.BlendMode,4,1 )
+'		End If
 		
 		AddVertex( vs.min.x+tx,vs.min.y+ty,ts.min.x,ts.min.y )
 		AddVertex( vs.max.x+tx,vs.min.y+ty,ts.max.x,ts.min.y )
@@ -3600,7 +3600,24 @@ Class Canvas
 			AddShadowCaster( image.ShadowCaster,tx,ty )
 		Endif
 	End
+
+	Method DrawImage( image:Image,tx:Float,ty:Float ) 'iDkP added: Unlined overload to avoid the branch test
 	
+		Local vs:=image.Vertices
+		Local ts:=image.TexCoords
+		
+		AddDrawOp( image.Shader,image.Material,image.BlendMode,4,1 )
+		
+		AddVertex( vs.min.x+tx,vs.min.y+ty,ts.min.x,ts.min.y )
+		AddVertex( vs.max.x+tx,vs.min.y+ty,ts.max.x,ts.min.y )
+		AddVertex( vs.max.x+tx,vs.max.y+ty,ts.max.x,ts.max.y )
+		AddVertex( vs.min.x+tx,vs.max.y+ty,ts.min.x,ts.max.y )
+		
+		If _lighting And image.ShadowCaster
+			AddShadowCaster( image.ShadowCaster,tx,ty )
+		Endif
+	End
+
 	Method DrawImage( image:Image, tx:Float, ty:Float, rz:Float, shader:Shader = null )
 		Local matrix:=Matrix
 		Matrix=matrix.Translate( tx,ty ).Rotate( rz )
