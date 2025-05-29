@@ -1246,33 +1246,34 @@ Struct Rect9<T>
 		Validate()
 	End
 
-'-------------------------- Geoms : Batch operation - Moves all four borders as a single
+	'-------------------------- Geoms : Batch operation - Moves all four borders as a single
 
 	'Method takes all four border deltas (left, top, right, bottom) as parameters 
 	'and applies them in one call, then validates once.
 
-	#rem monkeydoc Moves each border of the outter rect outward by the given amounts.
+	#rem monkeydoc Moves each border of the inner rect inward by the given amounts (increasing padding).
 	@added 2025-05-29
 	@param left T left edge
 	@param top T top edge
 	@param right T right edge
 	@param bottom T bottom edge
-	@param outside T each edges in the same time
+	@param inside T each edges in the same time
 	#end
-	Method MoveOutterBorders(left:T, top:T, right:T, bottom:T)
-		_rect0.min.x -= left
-		_rect0.min.y -= top
-		_rect0.max.x += right
-		_rect0.max.y += bottom
+
+	Method MoveInnerBorders(left:T, top:T, right:T, bottom:T)
+		_paddingLeft  += left
+		_paddingTop   += top
+		_paddingRight += right
+		_paddingBottom+= bottom
 		Update()
 		Validate()
 	End
 
-	Method MoveOutterBorders(outside:T)
-		_rect0.min.x -= outside
-		_rect0.min.y -= outside
-		_rect0.max.x += outside
-		_rect0.max.y += outside
+	Method MoveInnerBorders(inside:T)
+		_paddingLeft  += inside
+		_paddingTop   += inside
+		_paddingRight += inside
+		_paddingBottom+= inside
 		Update()
 		Validate()
 	End
