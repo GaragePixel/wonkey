@@ -1124,7 +1124,7 @@ Class Canvas
 			_.AddVertex( x1,y1,1,0, _._pmcolor )
 			_.AddVertex( x2,y2,1,1, _._pmcolor )
 			
-			If _._outlineMode=_.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=mojo.graphics.OutlineMode.None Return 'ATTENTION
 			
 			_.DrawOutlineLine( x0,y0,x1,y1 )
 			_.DrawOutlineLine( x1,y1,x2,y2 )
@@ -1291,7 +1291,7 @@ Class Canvas
 			_.AddVertex( x2,y2,1,1 )
 			_.AddVertex( x3,y3,0,1 )
 			
-			If _._outlineMode=_.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=mojo.graphics.OutlineMode.None Return 'ATTENTION
 			
 			_.DrawOutlineLine( x0,y0,x1,y1 )
 			_.DrawOutlineLine( x1,y1,x2,y2 )
@@ -1328,7 +1328,7 @@ Class Canvas
 			_.AddVertex( rect.max.x,rect.max.y,tc.max.x,tc.max.y )
 			_.AddVertex( rect.min.x,rect.max.y,tc.min.x,tc.max.y )
 	
-			If _._outlineMode=_.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=mojo.graphics.OutlineMode.None Return 'ATTENTION
 			
 			_.DrawOutline( rect )
 		End
@@ -1352,7 +1352,7 @@ Class Canvas
 			_.AddVertex( rect.max.x,rect.max.y,s1,t1 )
 			_.AddVertex( rect.min.x,rect.max.y,s0,t1 )
 	
-			If _._outlineMode=_.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=mojo.graphics.OutlineMode.None Return 'ATTENTION
 			
 			_.DrawOutline( rect )
 		End
@@ -1478,19 +1478,19 @@ Class Canvas
 				_._._pmcolor = pmcolor
 			End
 
-			Method Color( x:Float,y:Float,w:Float,h:Float, color1:Color=stdlib.graphics.Color.Black, color2:Color=stdlib.graphics.Color.White )
-				
-				Local color_old:Color = _._._color
+'			Method Color( x:Float,y:Float,w:Float,h:Float, color1:Color=Color.Black, color2:Color=Color.White ) 'ATTENTION
+				'TOFIX
+'				Local color_old:Color = _._._color
 		
-				_._.Color = color1
-				_.Wireframe.Rect( x, y, w, h )
+'				_._.Color = color1
+'				_.Wireframe.Rect( x, y, w, h )
 		
-				_._.Color = color2
-				_.Wireframe.Rect( x+1, y+1, w-2, h-2 )
+'				_._.Color = color2
+'				_.Wireframe.Rect( x+1, y+1, w-2, h-2 )
 		
-				_._.Color = color_old
-				_.Rect( x+2, y+2, w-4, h-4 )
-			End
+'				_._.Color = color_old
+'				_.Rect( x+2, y+2, w-4, h-4 )
+'			End
 	
 			#rem wonkeydoc Draws a grid of cells (made from lines).
 			@author jean-luc
@@ -2210,7 +2210,7 @@ Class Canvas
 				_.AddPointVertex( px,py,0,0 )
 			Next
 			
-			If _._outlineMode=_.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=mojo.graphics.OutlineMode.None Return 'ATTENTION
 			
 			For Local i:=0 until n
 	
@@ -2269,7 +2269,7 @@ Class Canvas
 				_.AddVertex( vertices[i],vertices[i+1],0,0 )
 			Next
 	
-			If _._outlineMode=_.OutlineMode.None Or order<3 Return 'ATTENTION
+			If _._outlineMode=mojo.graphics.OutlineMode.None Or order<3 Return 'ATTENTION
 			
 			For Local i:=0 Until order-1
 				
@@ -2298,7 +2298,7 @@ Class Canvas
 				_.AddVertex( vertices[i],vertices[i+1],0,0 )
 			Next
 			
-			If _._outlineMode=_.OutlineMode.None Or order<3 Return 'ATTENTION
+			If _._outlineMode=mojo.graphics.OutlineMode.None Or order<3 Return 'ATTENTION
 			
 			For Local i:=0 Until count
 				
