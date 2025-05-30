@@ -278,9 +278,8 @@ Class Image Extends Resource
 		Return _texCoords
 	End
 
-'jl added
-'------------------------------------------------------------	
 	#rem wonkeydoc Image filepath.
+	@author jean-luc
 	#end
 	Property FilePath:string()
 		Return _filePath
@@ -290,8 +289,10 @@ Class Image Extends Resource
 
 
 	#rem wonkeydoc The image's pixmap - usually used for internal stuff.
-	a superb example is to use this as a way of saving an image
+	@author jean-luc
+	A superb example is to use this as a way of saving an image
 	In code do the following:
+	@example:
 	<image>.GetPixmap().Save( path )
 	#end	
 	method GetPixmap:Pixmap()
@@ -350,15 +351,13 @@ Class Image Extends Resource
 		
 		Local image:=New Image( pixmap,textureFlags,shader )
 
-'jl added
-'------------------------------------------------------------
-		image.FilePath = path
-'------------------------------------------------------------		
+		image.FilePath = path 'jl added
+
 		Return image
 	End
 
-'---[ by DrCox85 ]----------------------------------------------
 	#rem wonkeydoc Loads an image from Databuffer.
+	@author DrCox85
 	#end
 	Function Load:Image( data:DataBuffer,shader:Shader=Null,textureFlags:TextureFlags=TextureFlags.FilterMipmap )
 		
@@ -372,7 +371,6 @@ Class Image Extends Resource
 		
 		Return image
 	End
-'---------------------------------------------------------------
 
 	#rem wonkeydoc Loads a bump image from file(s).
 	
@@ -474,10 +472,7 @@ Class Image Extends Resource
 	
 	Private
 	
-'jl added
-'------------------------------------------------------------
-	Field _filePath:string
-'------------------------------------------------------------
+	Field _filePath:string 'jl added
 
 	Field _shader:Shader
 	Field _uniforms:UniformBlock
@@ -533,10 +528,7 @@ Class Image Extends Resource
 		Color=Color.White
 		LightDepth=100
 
-'jl added
-'-------------------------------------------------
-		_filePath = texture.FilePath
-'-------------------------------------------------
+		_filePath = texture.FilePath 'jl added
 
 		UpdateTexCoords()
 		UpdateVertices()
@@ -558,13 +550,119 @@ Class Image Extends Resource
 		_handle=image._handle
 		_scale=image._scale
 		
-'jl added
-'-------------------------------------------------
-		_filePath = image.FilePath
-'-------------------------------------------------
+		_filePath = image.FilePath 'jl added
+
 		UpdateTexCoords()
 		UpdateVertices()
 	End
+
+' Integrated Class Image Extension 'About Drawing an image on a pixmap 
+'
+' iDkP from GaragePixel
+' 2025-01-16
+'
+' Proposed and discuted in the Discord server by iDkP: 
+' https://discord.com/channels/796336780302876683/870267572812128298/1329307346895110205
+'
+' 	— « Thanks @doumdoum for giving a kick to this idea^^ 
+' 		I had more or less given up and used custom drawing routines on pixmaps. 
+' 		But the basic idea was to produce a pixmap by drawing with mojo functions 
+' 		to take advantage of the acceleration, while freeing the VRam from the texture, 
+' 		keeping it in RAM to use it in the context of a "retro programmed" engine 
+' 		or other ideas. »
+'
+' This method extends Mojo's Image with methods to create Pixmaps from image content,
+' allowing for efficient zero-copy pipeline integration between the rendering
+' system and the pixmap drawing API. This enables seamless transfer from
+' GPU-accelerated images to CPU-manipulable pixel data.
+
+    #rem wonkeydoc Converting any Image to Pixmap
+    (Get a new pixmap from an Image)
+    @author iDkP from GaragePixel
+    @since 2025-01-16
+	This implementation handles the complex task of transferring pixel data
+	from a VRAM to RAM through an intermediate Canvas operation.
+	@param rect [[Rect]] the cliping rect
+	@param dstx [[Int]] the destination of the 1st left pixel
+	@param dsty [[Int]] the destination of the 1st top pixel
+	@param convertPixelFormat [[Bool]] Adopt or no the image's pixelformat
+    #end
+    Method FromImage:Pixmap(	rect:Recti=Null,
+								dstx:Int=0,
+								dsty:Int=0,
+								convertPixelFormat:Bool=False	)
+
+		' This is the Instance method for converting self to Pixmap
+
+        'Get a new pixmap from an Image
+        
+        Local w:Int=Width
+        Local h:Int=Height
+        Local f:=PixelFormat.RGBA8
+        
+        Local p:=New Pixmap(w,h,f)
+        Local i:=New Image(w,h,f,TextureFlags.Dynamic)
+        Local c:=New Canvas(i)
+
+        c.DrawImage(Self,dstx,dsty)
+        c.Flush()
+
+        If rect=Null rect=New Recti(0,0,w,h)
+        c.CopyPixels(rect,p)
+        If convertPixelFormat p=p.Convert(Self.Texture.Format)
+        
+        i=Null
+        c=Null
+        GCCollect()        
+
+        Return p
+    End
+    
+    #rem wonkeydoc Static function for converting any Image to Pixmap
+    (Get a new pixmap from an Image)
+    @author iDkP from GaragePixel
+    @since 2025-01-16
+	This implementation handles the complex task of transferring pixel data
+	from a VRAM to RAM through an intermediate Canvas operation.
+	@param image [[Image]] the image source
+	@param rect [[Rect]] the cliping rect
+	@param dstx [[Int]] the destination of the 1st left pixel
+	@param dsty [[Int]] the destination of the 1st top pixel
+	@param convertPixelFormat [[Bool]] Adopt or no the image's pixelformat
+    #end 
+    Function FromImage:Pixmap(  image:Image,
+								rect:Recti=Null,
+								dstx:Int=0,
+								dsty:Int=0,
+								convertPixelFormat:Bool=False	)
+
+		' Proposed and discuted in the Discord server by iDkP: 
+		' https://discord.com/channels/796336780302876683/870267572812128298/1329307346895110205
+		'
+		' The process creates a temporary Image and Canvas, renders the source
+		' ImageWrapper to it, then copies the pixel data into a new Pixmap.
+        
+        Local w:Int=image.Width
+        Local h:Int=image.Height
+        Local f:=PixelFormat.RGBA8
+        
+        Local p:=New Pixmap(w,h,f)
+        Local i:=New Image(w,h,f,TextureFlags.Dynamic)
+        Local c:=New Canvas(i)
+
+        c.DrawImage(image,dstx,dsty)
+        c.Flush()
+
+        If rect=Null rect=New Recti(0,0,w,h)
+        c.CopyPixels(rect,p)
+        If convertPixelFormat p=p.Convert(image.Texture.Format)
+        
+        i=Null
+        c=Null
+        GCCollect()        
+
+        Return p
+    End
 
 End
 
@@ -576,26 +674,23 @@ Class ResourceManager Extension
 		
 		Local image:=Cast<Image>( OpenResource( slug ) )
 
-'jl changed
-'------------------------------------------------------------
-		If image Then
+		'If image Return image 'undone by jl
+
+		'jl changed:
+		If image
 			image.FilePath = path
 			Return image
-		End If
-'------------------------------------------------------------
+		End
+
 		Local texture:=OpenTexture( path,Null )
 		If Not texture Return Null
 		
 		image=New Image( texture,shader )
 
-'jl added
-'------------------------------------------------------------
-		image.FilePath = path
-'------------------------------------------------------------
+		image.FilePath = path 'jl added
 
 		AddResource( slug,image )
 
 		Return image
 	End
-
 End
