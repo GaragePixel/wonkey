@@ -182,7 +182,7 @@ Class Canvas
 		Return _tdraw
 	End	
 
-	#rem wonkeydoc Get access to the Transform methods.
+	#rem monkeydoc Get access to the Transform methods.
 	@author iDkP from GaragePixel
 	@since 2025-05-29
 	#end
@@ -537,7 +537,7 @@ Class Canvas
 
 	Class TTransform
 
-		#rem wonkeydoc The current drawing matrix
+		#rem monkeydoc The current drawing matrix
 		All coordinates passed to draw methods are multiplied by this matrix for rendering.
 		#end
 		Property Matrix:AffineMat3f() 
@@ -551,7 +551,7 @@ Class Canvas
 			_._tanvec=_._matrix.i.Normalize()
 		End
 		
-		#rem wonkeydoc The current outline width.
+		#rem monkeydoc The current outline width.
 		#end
 		Property OutlineWidth:Float()
 			
@@ -562,21 +562,21 @@ Class Canvas
 			_._outlineWidth=width
 		End
 		
-		#rem wonkeydoc Pushes the drawing matrix onto the internal matrix stack.
+		#rem monkeydoc Pushes the drawing matrix onto the internal matrix stack.
 		#end
 		Method PushMatrix()
 		
 			_._matrixStack.Push( _._matrix )
 		End
 		
-		#rem wonkeydoc Pops the drawing matrix off the internal matrix stack.
+		#rem monkeydoc Pops the drawing matrix off the internal matrix stack.
 		#end
 		Method PopMatrix()
 		
 			_._matrix=_._matrixStack.Pop()
 		End
 		
-		#rem wonkeydoc Clears the internal matrix stack and sets the drawing matrix to the identitity matrix.
+		#rem monkeydoc Clears the internal matrix stack and sets the drawing matrix to the identitity matrix.
 		#end
 		Method ClearMatrix()
 		
@@ -584,7 +584,7 @@ Class Canvas
 			_._matrix=New AffineMat3f
 		End
 		
-		#rem wonkeydoc Translates the drawing matrix.
+		#rem monkeydoc Translates the drawing matrix.
 		Translates the drawing matrix. This has the effect of translating all drawing coordinates by `tx` and `ty`.
 		@param tx X translation.
 		@param ty Y translation.
@@ -600,7 +600,7 @@ Class Canvas
 			Matrix=Matrix.Translate( tv )
 		End
 	
-		#rem wonkeydoc Rotates the drawing matrix.
+		#rem monkeydoc Rotates the drawing matrix.
 		Rotates the drawing matrix. This has the effect of rotating all drawing coordinates by the angle `rz'.
 		@param rz Rotation angle in radians.
 		#end
@@ -609,7 +609,7 @@ Class Canvas
 			Matrix=Matrix.Rotate( rz )
 		End
 	
-		#rem wonkeydoc Scales the drawing matrix.
+		#rem monkeydoc Scales the drawing matrix.
 		Scales the drawing matrix. This has the effect of scaling all drawing coordinates by `sx` and `sy`.
 		@param sx X scale factor.
 		@param sy Y scale factor.
@@ -968,7 +968,7 @@ Class Canvas
 		_lighting=False
 	End
 
-	#rem wonkeydoc Mini-Library Draw
+	#rem monkeydoc Mini-Library Draw
 	@author iDkP from GaragePixel
 	@since 2025-05-25
 	@version 2025-05-26
@@ -988,49 +988,49 @@ Class Canvas
 	#end
 	Class TDraw
 
-		#rem wonkeydoc Get access to the Triangle_ methods.
+		#rem monkeydoc Get access to the Triangle_ methods.
 		#end
 		Property Triangle_:TTriangle_()
 			Return _ttriangle_
 		End
 
-		#rem wonkeydoc Get access to the Rect_ methods.
+		#rem monkeydoc Get access to the Rect_ methods.
 		#end
 		Property Rect_:TRect_()
 			Return _trect_
 		End
 
-		#rem wonkeydoc Get access to the Image_ methods.
+		#rem monkeydoc Get access to the Image_ methods.
 		#end
 		Property Image_:TImage_()
 			Return _timage_
 		End
 
-		#rem wonkeydoc Get access to the Icon_ methods.
+		#rem monkeydoc Get access to the Icon_ methods.
 		#end
 		Property Icon:TIcon()
 			Return _ticon
 		End
 
-		#rem wonkeydoc Get access to the Text_ methods.
+		#rem monkeydoc Get access to the Text_ methods.
 		#end
 		Property Text_:TText_()
 			Return _ttext_
 		End
 
-		#rem wonkeydoc Get access to the Wireframe methods.
+		#rem monkeydoc Get access to the Wireframe methods.
 		#end
 		Property Wireframe:TWireframe()
 			Return _twireframe
 		End
 
-		#rem wonkeydoc Get access to the Debug methods.
+		#rem monkeydoc Get access to the Debug methods.
 		#end
 		Property Debug:TDebug()
 			Return _tdebug
 		End
 
-		#rem wonkeydoc Draws a point.
+		#rem monkeydoc Draws a point.
 		Draws a point in the current [[Color]] using the current [[BlendMode]].
 		The point coordinates are transformed by the current [[Matrix]] and clipped to the current [[Viewport]] and [[Scissor]].
 		@param x Point x coordinate.
@@ -1057,7 +1057,7 @@ Class Canvas
 			Point( v.x,v.y )
 		End
 
-		#rem wonkeydoc Draws a line.
+		#rem monkeydoc Draws a line.
 		Draws a line in the current [[Color]] using the current [[BlendMode]].
 		The line coordinates are transformed by the current [[Matrix]] and clipped to the current [[Viewport]] and [[Scissor]].
 		@param x0 X coordinate of first endpoint of the line.
@@ -1113,7 +1113,7 @@ Class Canvas
 			Line( v0.x,v0.y,v1.x,v1.y )
 		End
 		
-		#rem wonkeydoc Draws a triangle.
+		#rem monkeydoc Draws a triangle.
 		Draws a triangle in the current [[Color]] using the current [[BlendMode]].
 		The triangle vertex coordinates are also transform by the current [[Matrix]].
 		#End
@@ -1124,7 +1124,7 @@ Class Canvas
 			_.AddVertex( x1,y1,1,0, _._pmcolor )
 			_.AddVertex( x2,y2,1,1, _._pmcolor )
 			
-			If _._outlineMode=sdk_mojo.m2.graphics.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=OutlineMode.None Return 'ATTENTION
 			
 			_.DrawOutlineLine( x0,y0,x1,y1 )
 			_.DrawOutlineLine( x1,y1,x2,y2 )
@@ -1279,7 +1279,7 @@ Class Canvas
 		
 		End 
 
-		#rem wonkeydoc Draws a quad.
+		#rem monkeydoc Draws a quad.
 		Draws a quad in the current [[Color]] using the current [[BlendMode]].
 		The quad vertex coordinates are also transform by the current [[Matrix]].
 		#end
@@ -1291,7 +1291,7 @@ Class Canvas
 			_.AddVertex( x2,y2,1,1 )
 			_.AddVertex( x3,y3,0,1 )
 			
-			If _._outlineMode=sdk_mojo.m2.graphics.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=OutlineMode.None Return 'ATTENTION
 			
 			_.DrawOutlineLine( x0,y0,x1,y1 )
 			_.DrawOutlineLine( x1,y1,x2,y2 )
@@ -1304,7 +1304,7 @@ Class Canvas
 			Quad( v0.x,v0.y,v1.x,v1.y,v2.x,v2.y,v3.x,v3.y )
 		End
 	
-		#rem wonkeydoc Draws a rectangle.
+		#rem monkeydoc Draws a rectangle.
 		Draws a rectangle in the current [[Color]] using the current [[BlendMode]].
 		The rectangle vertex coordinates are also transform by the current [[Matrix]].
 		#end
@@ -1328,7 +1328,7 @@ Class Canvas
 			_.AddVertex( rect.max.x,rect.max.y,tc.max.x,tc.max.y )
 			_.AddVertex( rect.min.x,rect.max.y,tc.min.x,tc.max.y )
 	
-			If _._outlineMode=sdk_mojo.m2.graphics.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=OutlineMode.None Return 'ATTENTION
 			
 			_.DrawOutline( rect )
 		End
@@ -1352,7 +1352,7 @@ Class Canvas
 			_.AddVertex( rect.max.x,rect.max.y,s1,t1 )
 			_.AddVertex( rect.min.x,rect.max.y,s0,t1 )
 	
-			If _._outlineMode=sdk_mojo.m2.graphics.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=OutlineMode.None Return 'ATTENTION
 			
 			_.DrawOutline( rect )
 		End
@@ -1419,13 +1419,13 @@ Class Canvas
 		
 		Class TRect_
 			
-			#rem wonkeydoc Get access to the Patches methods.
+			#rem monkeydoc Get access to the Patches methods.
 			#end
 			Property Patches:TPatches()
 				Return _tpatches
 			End
 
-			#rem wonkeydoc Get access to the Frame methods.
+			#rem monkeydoc Get access to the Frame methods.
 			#end
 			Property Frame:TFrame()
 				Return _tframe
@@ -1596,7 +1596,7 @@ Class Canvas
 				
 			End 
 
-			#rem wonkeydoc Mini-Library TPatches (draw a rect9 struct)
+			#rem monkeydoc Mini-Library TPatches (draw a rect9 struct)
 			@author iDkP from GaragePixel
 			@since 2025-05-14
 			@version 2025-05-26
@@ -1614,13 +1614,13 @@ Class Canvas
 			#end
 			Class TPatches
 	
-				#rem wonkeydoc Get access to the Debug methods.
+				#rem monkeydoc Get access to the Debug methods.
 				#end
 				Property Debug:TDebug()
 					Return _tdebug
 				End
 		
-				#rem wonkeydoc Draws nine images arranged in a nine-patch pattern within a Rect9 using arrays.
+				#rem monkeydoc Draws nine images arranged in a nine-patch pattern within a Rect9 using arrays.
 				@author iDkP from GaragePixel
 				@since 2025-05-24
 				
@@ -1677,7 +1677,7 @@ Class Canvas
 					___.Alpha=alpha_old
 				End 
 		
-				#rem wonkeydoc Draws nine images arranged in a nine-patch pattern using direct pointers.
+				#rem monkeydoc Draws nine images arranged in a nine-patch pattern using direct pointers.
 				@author iDkP from GaragePixel
 				@since 2025-05-24
 				
@@ -1724,7 +1724,7 @@ Class Canvas
 					___.Alpha=alpha_old
 				End 
 		
-				#rem wonkeydoc Draws nine images arranged in a nine-patch pattern within a Rect9.
+				#rem monkeydoc Draws nine images arranged in a nine-patch pattern within a Rect9.
 				@author iDkP from GaragePixel
 				@since 2025-05-24
 				
@@ -1805,7 +1805,7 @@ Class Canvas
 					End 
 				End 
 		
-				#rem wonkeydoc Draws nine images arranged in a nine-patch pattern within a Rect9 with individual tiling modes.
+				#rem monkeydoc Draws nine images arranged in a nine-patch pattern within a Rect9 with individual tiling modes.
 				@author iDkP from GaragePixel
 				@since 2025-05-24
 				
@@ -1960,7 +1960,7 @@ Class Canvas
 					___.Alpha=alpha_old
 				End 	
 				
-				#rem wonkeydoc Draws the outter frame of a rect9, precise the color.
+				#rem monkeydoc Draws the outter frame of a rect9, precise the color.
 				Draws the rect9's outter rect using the current BlendMode.
 				The outter rect have his own color as an optional parameter.
 				The vertex coordinates are also transform by the current Matrix. 	
@@ -1975,7 +1975,7 @@ Class Canvas
 					___.Color=oldColor
 				End 
 				
-				#rem wonkeydoc Draws a rect9's inner frame.	
+				#rem monkeydoc Draws a rect9's inner frame.	
 				Draws the rect9's inner rect using the current BlendMode.
 				The vertex coordinates are also transform by the current Matrix. 	
 				The inner rect have his own color as an optional parameter.
@@ -1990,7 +1990,7 @@ Class Canvas
 					___.Color=oldColor
 				End 	
 		
-				#rem wonkeydoc Draw the outter rect with a H inside representing the zone delimitations
+				#rem monkeydoc Draw the outter rect with a H inside representing the zone delimitations
 				Because the wireframe method actually draws the two rectangles of rect9, while this
 				method draws the lines projected from the inner rect to the outter rect.
 				@param The Rect9 to draw
@@ -2010,7 +2010,7 @@ Class Canvas
 					___.Color=old_color
 				End
 	
-				#rem wonkeydoc Mini-Library TPatches.Debug
+				#rem monkeydoc Mini-Library TPatches.Debug
 				@author iDkP from GaragePixel
 				@since 2025-05-25
 						
@@ -2033,7 +2033,7 @@ Class Canvas
 				#end			
 				Class TDebug
 			
-					#rem wonkeydoc Draw the outter rect with a H inside and a Z in the H zones
+					#rem monkeydoc Draw the outter rect with a H inside and a Z in the H zones
 					Because the wireframe method actually draws the two rectangles of rect9, while this
 					method draws the lines projected from the inner rect to the outter rect.
 					@param The Rect9 to draw
@@ -2054,7 +2054,7 @@ Class Canvas
 						____.Color=old_color
 					End
 				
-					#rem wonkeydoc Draw the outter rect with a H inside and a X in the H zones
+					#rem monkeydoc Draw the outter rect with a H inside and a X in the H zones
 					Because the wireframe method actually draws the two rectangles of rect9, while this
 					method draws the lines projected from the inner rect to the outter rect.
 					@param The Rect9 to draw
@@ -2075,7 +2075,7 @@ Class Canvas
 						____.Color=old_color
 					End
 				
-					#rem wonkeydoc Draw only the grid H
+					#rem monkeydoc Draw only the grid H
 					Because the wireframe method actually draws the two rectangles of rect9, while this
 					method draws the lines projected from the inner rect to the outter rect.
 					@param The Rect9 to draw
@@ -2091,7 +2091,7 @@ Class Canvas
 						____.Draw.Line(	this.Left,			this.InnerBottom,	this.Right,			this.InnerBottom)
 					End 
 				
-					#rem wonkeydoc Draw only the Z
+					#rem monkeydoc Draw only the Z
 					@param The Rect9 to draw
 					#end
 					Method Z<T>( this:Rect9<T> ) Where T Implements IReal Or T Implements INumeric
@@ -2099,7 +2099,7 @@ Class Canvas
 						Zinternal(this, verts)
 					End
 				
-					#rem wonkeydoc Draw only the cross (X shape)
+					#rem monkeydoc Draw only the cross (X shape)
 					@param The Rect9 to draw
 					#end
 					Method X<T>( this:Rect9<T> )  Where T Implements IReal Or T Implements INumeric'Method Cross<T>( this:Rect9<T> ) 'iDkP: CANNOT CALL IT 'DRAWX' BECAUSE INTERNAL BUG!
@@ -2126,7 +2126,7 @@ Class Canvas
 				
 					Private 
 				
-					#rem wonkeydoc @hidden
+					#rem monkeydoc @hidden
 					#end
 					Method Zinternal<T>( this:Rect9<T>, verts:Vec2<T>[] ) Where T Implements IReal Or T Implements INumeric
 						
@@ -2178,7 +2178,7 @@ Class Canvas
 
 		End  
 
-		#rem wonkeydoc Draws an oval.
+		#rem monkeydoc Draws an oval.
 		Draws an oval in the current [[Color]] using the current [[BlendMode]].
 		The oval vertex coordinates are also transform by the current [[Matrix]].
 		@param x Top left x coordinate for the oval.
@@ -2210,7 +2210,7 @@ Class Canvas
 				_.AddPointVertex( px,py,0,0 )
 			Next
 			
-			If _._outlineMode=sdk_mojo.m2.graphics.OutlineMode.None Return 'ATTENTION
+			If _._outlineMode=OutlineMode.None Return 'ATTENTION
 			
 			For Local i:=0 until n
 	
@@ -2228,7 +2228,7 @@ Class Canvas
 			
 		End
 		
-		#rem wonkeydoc Draws an ellipse.
+		#rem monkeydoc Draws an ellipse.
 		Draws an ellipse in the current [[Color]] using the current [[BlendMode]].
 		The ellipse is also transformed by the current [[Matrix]].
 		@param x Center x coordinate for the ellipse.
@@ -2241,7 +2241,7 @@ Class Canvas
 			Oval( x-xRadius,y-yRadius,xRadius*2,yRadius*2 )
 		End
 		
-		#rem wonkeydoc Draws a circle.
+		#rem monkeydoc Draws a circle.
 		Draws a circle in the current [[Color]] using the current [[BlendMode]] and transformed by the current [[Matrix]].
 		@param x Center x coordinate for the circle.
 		@param y Center y coordinate for the circle.
@@ -2252,7 +2252,7 @@ Class Canvas
 			Oval( x-radius,y-radius,radius*2,radius*2 )
 		End
 	
-		#rem wonkeydoc Draws a polygon.
+		#rem monkeydoc Draws a polygon.
 		Draws a polygon using the current [[Color]], [[BlendMode]] and [[Matrix]].
 		The `vertices` array must be at least 2 elements long
 		@param vertices Array of x/y vertex coordinate pairs.
@@ -2269,7 +2269,7 @@ Class Canvas
 				_.AddVertex( vertices[i],vertices[i+1],0,0 )
 			Next
 	
-			If _._outlineMode=sdk_mojo.m2.graphics.OutlineMode.None Or order<3 Return 'ATTENTION
+			If _._outlineMode=OutlineMode.None Or order<3 Return 'ATTENTION
 			
 			For Local i:=0 Until order-1
 				
@@ -2281,7 +2281,7 @@ Class Canvas
 			_.DrawOutlineLine( vertices[kn],vertices[kn+1],vertices[0],vertices[1] )
 		End
 		
-		#rem wonkeydoc Draws a sequence of polygons.
+		#rem monkeydoc Draws a sequence of polygons.
 		Draws a sequence of polygons using the current [[Color]], [[BlendMode]] and [[Matrix]].
 		@param order The type of polygon: 3=triangles, 4=quads, >4=n-gons.
 		@param count The number of polygons.
@@ -2298,7 +2298,7 @@ Class Canvas
 				_.AddVertex( vertices[i],vertices[i+1],0,0 )
 			Next
 			
-			If _._outlineMode=sdk_mojo.m2.graphics.OutlineMode.None Or order<3 Return 'ATTENTION
+			If _._outlineMode=OutlineMode.None Or order<3 Return 'ATTENTION
 			
 			For Local i:=0 Until count
 				
@@ -2314,7 +2314,7 @@ Class Canvas
 			
 		End
 		
-		#rem wonkeydoc Draws a sequence of primtives.
+		#rem monkeydoc Draws a sequence of primtives.
 		Draws a sequence of convex primtives using the current [[Color]], [[BlendMode]] and [[Matrix]].
 		@param order The type of primitive: 1=points, 2=lines, 3=triangles, 4=quads, >4=n-gons.
 		@param count The number of primitives to draw.
@@ -2441,19 +2441,9 @@ Class Canvas
 			Image( image,tv.x,tv.y,rz,sv.x,sv.y )
 		End
 
-		Method Image( 'ATTENTION
-			'Added by iDkP
-			image:ImageWrapperMojo,
-			x:Float,y:Float,
-			rotation:Float,
-			scaleX:Float,scaleY:Float)
-			
-			Image(image.Image,x,y,rotation,scaleX,scaleY)
-		End
-		
 		Class TImage_ 
 
-			#rem wonkeydoc Draw an image tiled within a rectangle with various tiling patterns.
+			#rem monkeydoc Draw an image tiled within a rectangle with various tiling patterns.
 			@author iDkP for GaragePixel
 			@since 2025-05-23
 			@version 2025-05-26
@@ -2493,7 +2483,7 @@ Class Canvas
 				_._.Scissor=scissor_old
 			End
 		
-			#rem wonkeydoc Draw an image using a rect as reference.
+			#rem monkeydoc Draw an image using a rect as reference.
 			@author iDkP for GaragePixel
 			@since 2025-05-23
 			@version 2025-05-28 (Fit renamed Rect)
@@ -2863,7 +2853,7 @@ Class Canvas
 		
 		End 
 	
-		#rem wonkeydoc Draws text.
+		#rem monkeydoc Draws text.
 		Draws text using the current [[Color]], [[BlendMode]] and [[Matrix]].
 		@param text The text to draw.
 		@param tx X coordinate to draw text at.
@@ -3300,7 +3290,7 @@ Class Canvas
 				_.Point(x1, y1)
 			End
 
-			#rem wonkeydoc Draws a rect9, inner/outter rect using the same color.
+			#rem monkeydoc Draws a rect9, inner/outter rect using the same color.
 			@author iDkP from GaragePixel
 			@since 2025-05-29
 			@version 2025-05-29
@@ -3313,7 +3303,7 @@ Class Canvas
 				Rect(this._rect0.min.x,this._rect0.min.y,this._rect0.Width,this._rect0.Height)
 			End 
 			
-			#rem wonkeydoc Draws a rect9, inner/outter rect using different colors.
+			#rem monkeydoc Draws a rect9, inner/outter rect using different colors.
 			@author iDkP from GaragePixel
 			@since 2025-05-29
 			@version 2025-05-29
@@ -3591,7 +3581,7 @@ Class Canvas
 			Field _:TDraw 'parent of TWireframe
 		End
 
-		#rem wonkeydoc Mini-Library Debug Drawing
+		#rem monkeydoc Mini-Library Debug Drawing
 		@author iDkP from GaragePixel
 		@since 2025-05-25
 		@version 2025-05-26
@@ -3615,7 +3605,7 @@ Class Canvas
 		#end		
 		Class TDebug 
 		
-			#rem wonkeydoc Draw a X with lines in a square for debugging purpose
+			#rem monkeydoc Draw a X with lines in a square for debugging purpose
 			@author jl (jeanluc as Seyanjin)
 			
 				│ x,y 	0	0	│
@@ -3637,7 +3627,7 @@ Class Canvas
 				_.Line( x, y0, x, y1 )
 			End
 		
-			#rem wonkeydoc Draw a X with lines in a Rect for debugging purpose
+			#rem monkeydoc Draw a X with lines in a Rect for debugging purpose
 			@author iDkP for GaragePixel
 			@since 2025-05-24
 			
@@ -3661,7 +3651,7 @@ Class Canvas
 				_.Line( x, y0, x, y1 )
 			End
 			
-			#rem wonkeydoc Draw a X with lines in a quad for debugging purpose
+			#rem monkeydoc Draw a X with lines in a quad for debugging purpose
 			@author iDkP for GaragePixel
 			@since 2025-05-23
 			@param p0 the four vertices of a quad
@@ -3675,7 +3665,7 @@ Class Canvas
 				_.Line(	p1.x,	p1.y,	p3.x,	p3.y)
 			End
 		
-			#rem wonkeydoc Draw a Z with lines in a quad for debugging purpose
+			#rem monkeydoc Draw a Z with lines in a quad for debugging purpose
 			@author iDkP for GaragePixel
 			@since 2025-05-23
 			@param p0 the four vertices of a quad
@@ -3692,7 +3682,7 @@ Class Canvas
 				_.Line(	p2.x,	p2.y,	p3.x,	p3.y)
 			End
 		
-			#rem wonkeydoc Draw a line \ in a quad for debugging purpose
+			#rem monkeydoc Draw a line \ in a quad for debugging purpose
 			@author iDkP for GaragePixel
 			@since 2025-05-23
 			@param p0 the four vertices of a quad
@@ -3987,6 +3977,9 @@ Class Canvas
 	'Used to access to the sublibrary draw
 	Field _tdraw:TDraw=New TDraw() ' Added by iDkP 2025-05-25
 
+	'Used to access to the sublibrary Transform
+	Field _ttransform:TTransform=New TTransform() ' Added by iDkP 2025-05-29
+
 	Function Init2()
 		Global inited:=False
 		If inited Return
@@ -4077,22 +4070,64 @@ Class Canvas
 		_matrix=New AffineMat3f
 	End
 
-	#rem wonkeydoc hidden 
+	#rem monkeydoc hidden 
 	@author iDkP from GaragePixel 
 	@since 2025-05-25
-	@version 2025-05-26
+	@version 2025-05-28
 	#end
 	Method LinkSublibs()
 		
+		#rem iDkP's note:
+		
+		The nested classes' structure:
+		
+			· canvas
+				· _ttransform
+				· _tdraw
+					· _ttriangle_
+					· _trect_
+						· _tframe
+						· _tpatches
+							· _tdebug				
+					· _timage_
+					· _ticon
+					· _ttext_
+					· _twireframe
+					· _tdebug
+		#end
+		
+		_ttransform._=Self
+		
 		_tdraw._=Self
 		
-			_tdraw._tdebug._=_tdraw
+		_tdraw._tool._=_tdraw 'Tmp mostly
 		
-			_tdraw._trect9._=_tdraw
-			_tdraw._trect9.__=Self
+		_tdraw._ttriangle_._=_tdraw
 		
-				_tdraw._trect9._tdebug._=_tdraw._trect9
-				_tdraw._trect9._tdebug.__=Self
+		_tdraw._trect_._=_tdraw
+
+		_tdraw._trect_._tframe._=_tdraw._trect_
+		_tdraw._trect_._tframe.__=_tdraw
+		_tdraw._trect_._tframe.___=Self
+
+		_tdraw._trect_._tpatches._=_tdraw._trect_
+		_tdraw._trect_._tpatches.__=_tdraw
+		_tdraw._trect_._tpatches.___=Self
+		
+		_tdraw._trect_._tpatches._tdebug._=_tdraw._trect_._tpatches
+		_tdraw._trect_._tpatches._tdebug.__=_tdraw._trect_
+		_tdraw._trect_._tpatches._tdebug.___=_tdraw
+		_tdraw._trect_._tpatches._tdebug.____=Self
+		
+		_tdraw._timage_._=_tdraw
+		
+		_tdraw._ticon._=_tdraw
+
+		_tdraw._ttext_._=_tdraw
+		
+		_tdraw._twireframe._=_tdraw
+		
+		_tdraw._tdebug._=_tdraw
 	End
 
 	'Vertices
