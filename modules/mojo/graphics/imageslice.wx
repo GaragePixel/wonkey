@@ -47,6 +47,7 @@ In this code, Hezkind is an ad-hoc term, likely coined by the author (jl, Jean-L
 to describe an alternate way of slicing and parsing the PNG filename and layout,
 so I'm trying for figure the exact meaning^^ ..... :>
 #end
+
 Class ImageSlice
 
 	#rem wonkeydoc Load constructor.
@@ -132,8 +133,8 @@ Class ImageSlice
 
 	Field _sliceLive:bool[, ] = New bool[ 12, 42 ]
 	Field _sliceTexCoords:Rectf[, ] = New Rectf[ 12, 42 ]
-
-	private
+	
+private
 
 	#rem wonkeydoc hidden
 	Internal PNG loader and slice parser
