@@ -1562,8 +1562,8 @@ Class Canvas
 			Class TFrame
 
 				Method Rect3d<T>( 	x:T, y:T, w:T, h:T, 
-									color1:Color=stdlib.graphics.Color.White * 0.5, 
-									color2:Color=stdlib.graphics.Color.Black * 0.5 	) Where T Implements IReal Or T Implements INumeric
+									color1:Color=Color.White * 0.5, 
+									color2:Color=Color.Black * 0.5 	) Where T Implements IReal Or T Implements INumeric
 					
 					'jl added
 					'iDkP modified: made generic
