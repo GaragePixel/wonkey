@@ -1,15 +1,15 @@
 
 Namespace std.collections
 
-#rem wonkeydoc Convenience type alias for Map\<Int,V\>.
+#rem monkeydoc Convenience type alias for Map\<Int,V\>.
 #end
 Alias IntMap<V>:Map<Int,V>
 
-#rem wonkeydoc Convenience type alias for Map\<Float,V\>.
+#rem monkeydoc Convenience type alias for Map\<Float,V\>.
 #end
 Alias FloatMap<V>:Map<Float,V>
 
-#rem wonkeydoc Convenience type alias for Map\<String,V\>.
+#rem monkeydoc Convenience type alias for Map\<String,V\>.
 #end
 Alias StringMap<V>:Map<String,V>
 
@@ -20,7 +20,7 @@ Const ColorBlack:UByte=1
 
 Public
 
-#rem wonkeydoc The Map class provides support for associative maps.
+#rem monkeydoc The Map class provides support for associative maps.
 
 A map is a container style object that provides a mechanism for associating 'key' objects with 'value' objects.
 This is done using an internal node object that contains a reference to both a key and a value, 
@@ -31,6 +31,9 @@ Each key in a map occurs exactly once - a map cannot contain multiple equivalent
 Maps can handle inserting, removing and finding keys in 'O(log2)' time. 
 That is, the time needed to insert, remove or find a key is proportional to log2 
 of the number of items in the map.
+
+'iDkP: 
+'	Note: Using Red-Black Tree agorithm, internally. It's really fast.
 
 #end
 Class Map<K,V>
@@ -85,18 +88,18 @@ Class Map<K,V>
 	'	- AI Applications
 	'	- Massive Pixel Engines
 	
-	#rem wonkeydoc The map Node class.
+	#rem monkeydoc The map Node class.
 	#end
 	Class Node
 	
-		#rem wonkeydoc Gets the key contained in the node.
+		#rem monkeydoc Gets the key contained in the node.
 		@return The node's key.
 		#end
 		Property Key:K()
 			Return _key
 		End
 		
-		#rem wonkeydoc Gets the value contained in the node.
+		#rem monkeydoc Gets the value contained in the node.
 		@return The node's value.
 		#end
 		Property Value:V()
@@ -160,12 +163,13 @@ Class Map<K,V>
 		End
 		
 		Method Copy:Node( parent:Node )
+			'Modified by iDkP
+			'Use pointer for passing per cascade and by reference the item to copy
 			Local node:=New Node( _key,_value,_color,parent )
 			If _left node._left=_left.Copy( node )
 			If _right node._right=_right.Copy( node )
 			Return node
 		End
-	
 	End
 	
 	Struct Iterator
@@ -284,12 +288,12 @@ Class Map<K,V>
 		
 	End
 	
-	#rem wonkeydoc Creates a new empty map.
+	#rem monkeydoc Creates a new empty map.
 	#end
 	Method New()
 	End
 	
-	#rem wonkeydoc Gets a node iterator.
+	#rem monkeydoc Gets a node iterator.
 	
 	#end
 	
@@ -297,7 +301,7 @@ Class Map<K,V>
 		Return New Iterator( FirstNode )
 	End
 	
-	#rem wonkeydoc Gets a view of the map's keys.
+	#rem monkeydoc Gets a view of the map's keys.
 	The returned value can be used with an Eachin loop to iterate over the map's keys.
 	@return A MapKeys object.
 	#end
@@ -305,7 +309,7 @@ Class Map<K,V>
 		Return New MapKeys( Self )
 	End
 
-	#rem wonkeydoc Gets a view of the map's values.
+	#rem monkeydoc Gets a view of the map's values.
 	The returned value can be used with an Eachin loop to iterate over the map's values.
 	@return A MapValues object.
 	#end	
@@ -313,7 +317,7 @@ Class Map<K,V>
 		Return New MapValues( Self )
 	End
 	
-	#rem wonkeydocs Copies the map.
+	#rem monkeydocs Copies the map.
 	
 	@return A new map.
 	
@@ -324,28 +328,28 @@ Class Map<K,V>
 		Return New Map( root )
 	End
 	
-	#rem wonkeydoc Removes all keys from the map.
+	#rem monkeydoc Removes all keys from the map.
 	#end
 	Method Clear()
 		_root=Null
 	End
 	
-	#rem wonkeydoc Gets the number of keys in the map.
+	#rem monkeydoc Gets the number of keys in the map.
 	@return The number of keys in the map.
 	#end
-	Method Count:Int()
+	Method Count:UInt() 'iDkP: unsigned 32 bit!
 		If Not _root Return 0
 		Return _root.Count( 0 )
 	End
 
-	#rem wonkeydoc Checks if the map is empty.
+	#rem monkeydoc Checks if the map is empty.
 	@return True if the map is empty.
 	#end
 	Property Empty:Bool()
 		Return _root=Null
 	End
 
-	#rem wonkeydoc Checks if the map contains a given key.
+	#rem monkeydoc Checks if the map contains a given key.
 	@param key The key to check for.
 	@return True if the map contains the key.
 	#end
@@ -353,7 +357,7 @@ Class Map<K,V>
 		Return FindNode( key )<>Null
 	End
 	
-	#rem wonkeydoc Sets the value associated with a key in the map.
+	#rem monkeydoc Sets the value associated with a key in the map.
 	If the map does not contain `key`, a new key/value node is added and true is returned.
 	If the map already contains `key`, its associated value is updated and false is returned.
 	This operator functions identically to Set.
@@ -365,7 +369,7 @@ Class Map<K,V>
 		Set( key,value )
 	End
 
-	#rem wonkeydoc Gets the value associated with a key in the map.
+	#rem monkeydoc Gets the value associated with a key in the map.
 	@param key The key.
 	@return The value associated with `key`, or null if `key` is not in the map.
 	#end
@@ -374,8 +378,16 @@ Class Map<K,V>
 		If Not node Return Null
 		Return node._value
 	End
+
+	#rem monkeydoc Casts the map to a list of values.
 	
-	Operator To:List<V>()
+	The `To:List<V>` operator allows you to extract all values from the map
+	and store them in a new list. The keys are discarded during this process.
+	
+	@return A new `List<V>` containing the map's values.
+	#end
+	Operator To:List<V>() 'Added by iDkP
+		'2025-05-09 iDkP
 		'Set a list of values (negligates the keys)
 		Local list:=New List<V>()
 		For Local item:=Eachin Self 
@@ -384,7 +396,7 @@ Class Map<K,V>
 		Return list
 	End
 	
-	#rem wonkeydoc Sets the value associated with a key in the map.
+	#rem monkeydoc Sets the value associated with a key in the map.
 	If the map does not contain `key`, a new key/value node is added to the map and true is returned.
 	If the map already contains `key`, its associated value is updated and false is returned.
 	@param key The key.
@@ -395,7 +407,7 @@ Class Map<K,V>
 		
 		Local cmp:Int		
 
-		If NotRoot( Varptr(key),Varptr(value)) Return True 'Added by iDkP
+		If NotRoot( key,value) Return True 'Added by iDkP
 
 		' Try hint path first if available
 		If _lastAddedNode
@@ -425,12 +437,12 @@ Class Map<K,V>
 			End
 		Wend
 		
-		AddPair( Varptr(node), Varptr(key),Varptr(value), Varptr(parent), Varptr(cmp) ) 'Added by iDkP
+		AddPair( node, key,value, parent, cmp ) 'Added by iDkP
 		
 		Return True
 	End
 	
-	#rem wonkeydoc Adds a new key/value pair to a map.
+	#rem monkeydoc Adds a new key/value pair to a map.
 	If the map does not contain `key', a new key/value node is created and true is returned.
 	If the map already contains `key`, nothing happens and false is returned.
 	@param key The key.
@@ -439,7 +451,7 @@ Class Map<K,V>
 	#end
 	Method Add:Bool( key:K,value:V )
 		
-		If NotRoot( Varptr(key),Varptr(value)) Return True 'Added by iDkP
+		If NotRoot( key,value) Return True 'Added by iDkP
 	
 		Local node:=_root
 		Local parent:Node
@@ -457,12 +469,12 @@ Class Map<K,V>
 			End
 		Wend
 		
-		AddPair( Varptr(node), Varptr(key),Varptr(value), Varptr(parent), Varptr(cmp) ) 'Added by iDkP
+		AddPair( node, key,value, parent, cmp ) 'Added by iDkP
 		
 		Return True
 	End
 	
-	#rem wonkeydoc Updates the value associated with a key in the map.
+	#rem monkeydoc Updates the value associated with a key in the map.
 	If the map does not contain `key', nothing happens and false is returned.
 	If the map already contains `key`, its associated value is updated and true is returned.
 	@param key The key.
@@ -476,7 +488,7 @@ Class Map<K,V>
 		Return True
 	End
 	
-	#rem wonkeydoc Gets the value associated with a key in the map.
+	#rem monkeydoc Gets the value associated with a key in the map.
 	@param key The key.
 	@return The value associated with the key, or null if the key is not in the map.
 	#end
@@ -486,7 +498,7 @@ Class Map<K,V>
 		Return Null
 	End
 	
-	#rem wonkeydoc Removes a key from the map.
+	#rem monkeydoc Removes a key from the map.
 	@param key The key to remove.
 	@return True if the key was removed, or false if the key is not in the map.
 	#end
@@ -505,7 +517,7 @@ Class Map<K,V>
 		'Sugar
 		Return Union(this,onPlace)
 	End
-	
+
 	#rem wonkeydoc Union: Add each keys from this (param) that exist in self
 	@param This The map to compare.
 	@param onPlace if False, returns a copy of the map, else nothing
@@ -562,7 +574,7 @@ Class Map<K,V>
 		End 	
 		Return result	
 	End
-	
+
 	Private
 	
 	Field _root:Node
@@ -582,7 +594,7 @@ Class Map<K,V>
 		Return node
 	End
 
-	Property FirstNode:Node() 'iDkP: passed to public for special iterator, and as property for consistancy
+	Property FirstNode:Node() 'iDkP: passed public for special iterator, and as property for consistancy
 		If Not _root Return Null
 
 		Local node:=_root
@@ -652,7 +664,7 @@ Class Map<K,V>
 		End
 		
 		If splice._color=ColorBlack 
-			DeleteFixup( Varptr(child),Varptr(parent) )
+			DeleteFixup( child,parent )
 		End
 	End
 	
@@ -696,126 +708,126 @@ Class Map<K,V>
 		node._parent=child
 	End
 	
-	Method InsertFixup( node:Node Ptr ) 'iDkP from GaragePixel: pointer usage
-		While node[0]._parent And node[0]._parent._color=ColorRed And node[0]._parent._parent
-			If node[0]._parent=node[0]._parent._parent._left
-				Local uncle:=node[0]._parent._parent._right
+	Method InsertFixup( node:Node ) 'iDkP from GaragePixe: pointer usage
+		While node._parent And node._parent._color=ColorRed And node._parent._parent
+			If node._parent=node._parent._parent._left
+				Local uncle:=node._parent._parent._right
 				If uncle And uncle._color=ColorRed
-					node[0]._parent._color=ColorBlack
+					node._parent._color=ColorBlack
 					uncle._color=ColorBlack
 					uncle._parent._color=ColorRed
-					node[0]=uncle._parent
+					node=uncle._parent
 				Else
-					If node[0]=node[0]._parent._right
-						node[0]=node[0]._parent
-						RotateLeft( node[0] )
+					If node=node._parent._right
+						node=node._parent
+						RotateLeft( node )
 					End
-					node[0]._parent._color=ColorBlack
-					node[0]._parent._parent._color=ColorRed
-					RotateRight( node[0]._parent._parent )
+					node._parent._color=ColorBlack
+					node._parent._parent._color=ColorRed
+					RotateRight( node._parent._parent )
 				End
 			Else
-				Local uncle:=node[0]._parent._parent._left
+				Local uncle:=node._parent._parent._left
 				If uncle And uncle._color=ColorRed
-					node[0]._parent._color=ColorBlack
+					node._parent._color=ColorBlack
 					uncle._color=ColorBlack
 					uncle._parent._color=ColorRed
-					node[0]=uncle._parent
+					node=uncle._parent
 				Else
-					If node[0]=node[0]._parent._left
-						node[0]=node[0]._parent
-						RotateRight( node[0] )
+					If node=node._parent._left
+						node=node._parent
+						RotateRight( node )
 					End
-					node[0]._parent._color=ColorBlack
-					node[0]._parent._parent._color=ColorRed
-					RotateLeft( node[0]._parent._parent )
+					node._parent._color=ColorBlack
+					node._parent._parent._color=ColorRed
+					RotateLeft( node._parent._parent )
 				End
 			End
 		Wend
 		_root._color=ColorBlack
 	End
 	
-	Method DeleteFixup( node:Node Ptr,parent:Node Ptr ) 'iDkP from GaragePixel: pointer usage
+	Method DeleteFixup( node:Node,parent:Node ) 'iDkP from GaragePixel: pointer usage
 	
-		While node[0]<>_root And (Not node[0] Or node[0]._color=ColorBlack )
+		While node<>_root And (Not node Or node._color=ColorBlack )
 
-			If node[0]=parent[0]._left
+			If node=parent._left
 			
-				Local sib:=parent[0]._right
+				Local sib:=parent._right
 				
 				If sib._color=ColorRed
 					sib._color=ColorBlack
-					parent[0]._color=ColorRed
-					RotateLeft( parent[0] )
-					sib=parent[0]._right
+					parent._color=ColorRed
+					RotateLeft( parent )
+					sib=parent._right
 				End
 				
 				If (Not sib._left Or sib._left._color=ColorBlack) And (Not sib._right Or sib._right._color=ColorBlack)
 					sib._color=ColorRed
 					node=parent
-					parent[0]=parent[0]._parent
+					parent=parent._parent
 				Else
 					If Not sib._right Or sib._right._color=ColorBlack
 						sib._left._color=ColorBlack
 						sib._color=ColorRed
 						RotateRight( sib )
-						sib=parent[0]._right
+						sib=parent._right
 					End
-					sib._color=parent[0]._color
-					parent[0]._color=ColorBlack
+					sib._color=parent._color
+					parent._color=ColorBlack
 					sib._right._color=ColorBlack
-					RotateLeft( parent[0] )
-					node[0]=_root
+					RotateLeft( parent )
+					node=_root
 				End
 			Else	
-				Local sib:=parent[0]._left
+				Local sib:=parent._left
 				
 				If sib._color=ColorRed
 					sib._color=ColorBlack
-					parent[0]._color=ColorRed
-					RotateRight( parent[0] )
-					sib=parent[0]._left
+					parent._color=ColorRed
+					RotateRight( parent )
+					sib=parent._left
 				End
 				
 				If (Not sib._right Or sib._right._color=ColorBlack) And (Not sib._left Or sib._left._color=ColorBlack)
 					sib._color=ColorRed
 					node=parent
-					parent[0]=parent[0]._parent
+					parent=parent._parent
 				Else
 					If Not sib._left Or sib._left._color=ColorBlack
 						sib._right._color=ColorBlack
 						sib._color=ColorRed
 						RotateLeft( sib )
-						sib=parent[0]._left
+						sib=parent._left
 					End
-					sib._color=parent[0]._color
-					parent[0]._color=ColorBlack
+					sib._color=parent._color
+					parent._color=ColorBlack
 					sib._left._color=ColorBlack
-					RotateRight( parent[0] )
-					node[0]=_root
+					RotateRight( parent )
+					node=_root
 				End
 			End
 		Wend
-		If node[0] node[0]._color=ColorBlack
+		If node node._color=ColorBlack
 	End
 	
-	Method NotRoot:Bool( key:K Ptr,value:V Ptr ) 
+	Method NotRoot:Bool( key:K,value:V ) 
 		'Added by iDkP
 		If Not _root
-			_root=New Node( key[0],value[0],ColorRed,Null )
+			_root=New Node( key,value,ColorRed,Null )
 			Return True
 		End
 		Return False
 	End
 	
-	Method AddPair( node:Node Ptr, key:K Ptr,value:V Ptr, parent:Node Ptr, cmp:Int Ptr ) 
-		'Added by iDkP
-		node[0]=New Node( key[0],value[0],ColorRed,parent[0] )
-		_lastAddedNode=node[0]
-		If cmp[0]>0 
-			parent[0]._right=node[0] 
+	Method AddPair( node:Node, key:K,value:V, parent:Node, cmp:Int ) 
+		'[Author] iDkP
+		node=New Node( key,value,ColorRed,parent )
+		_lastAddedNode=node
+		If cmp>0 
+			parent._right=node 
 		Else 
-			parent[0]._left=node[0]
+			parent._left=node
 		End
 		InsertFixup( node )
 	End
