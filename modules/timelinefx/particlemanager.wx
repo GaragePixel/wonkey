@@ -316,7 +316,7 @@ Class tlParticleManager
 			p.corecomponent = core
 			p.AddComponent(core)
 			UnUsed.AddLast(p)
-			p.link = UnUsed.LastNode()
+			p.link = UnUsed.LastNode
 		Next
 		unusedcount = particles
 		EnableSetColor()
@@ -526,7 +526,7 @@ Class tlParticleManager
 				InUse[effect.EffectLayer, layer].AddLast(p)
 				'_UnUsed.Remove p
 				p.link.Remove()
-				p.link = InUse[effect.EffectLayer, layer].LastNode()
+				p.link = InUse[effect.EffectLayer, layer].LastNode
 				unusedcount -= 1
 				inusecount += 1
 				p.Removed = false
@@ -545,7 +545,7 @@ Class tlParticleManager
 		UnUsed.AddLast(p)
 		'_InUse[p._layer].Remove p
 		p.link.Remove()
-		p.link = UnUsed.LastNode()
+		p.link = UnUsed.LastNode
 	End Method
 
 	Private
