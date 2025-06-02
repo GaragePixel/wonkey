@@ -427,10 +427,10 @@ Class Stack<T> Implements IContainer<T>
 		_length+=1
 	End
 
+	#rem wonkeydoc Adds a value to stack that has no other clone.
+	@param value The value to add.
+	#end
 	Method AddUnique( value:T )
-		
-		'TODO: Optimise using the new iDkP additions
-		
 		If Not Self.Contains( value ) Then Self.Add( value )
 	End
 	

@@ -360,11 +360,31 @@ Struct Rect<T>
 	Method Intersects:Bool( r:Rect )
 		Return r.max.x>min.x And r.min.x<max.x And r.max.y>min.y And r.min.y<max.y
 	End
+
+	#rem wonkeydoc Move the rect.
+	@adapted iDkP 2025-06-02
+	@param dx the new location
+	@param dy the new location
+	#end
+	Method MoveTo( x:T,y:T )
+		Local size:=Self.Size
+		Self.Origin=New Vec2<T>( x,y )
+		Self.Size=size
+	End
+	
+	#rem wonkeydoc Move the rect.
+	@adapted iDkP 2025-06-02
+	@param dx the quantity of mouvement
+	@param dy the quantity of mouvement
+	#end
+	Method MoveBy( dx:T,dy:T ) Where T Implements INumeric 
+		Local size:=Self.Size
+		Self.Origin=Self.Origin+New Vec2<T>( dx,dy )
+		Self.Size=size
+	End
 	
 	#rem wonkeydoc Gets a string describing the rect.
-	
-	Deprecated: Use Operator To:String instead.
-	
+	@deprecated: Use Operator To:String instead.
 	#end
 	Method ToString:String()
 		Return Self
@@ -613,4 +633,3 @@ Function TransformRecti<T>:Recti( rect:Recti,matrix:AffineMat3<T> )
 		
 	Return New Recti( Round( min.x ),Round( min.y ),Round( max.x ),Round( max.y ) )
 End
-
