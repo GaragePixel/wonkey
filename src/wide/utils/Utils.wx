@@ -316,48 +316,47 @@ End
 '	
 'End
 
-
-Class Stack<T> Extension
-	
-	Method AddUnique( value:T )
-		
-		If Not Self.Contains( value ) Then Self.Add( value )
-	End
-	
-	Operator+=( item:T )
-		
-		Self.Add( item )
-	End
-	
-	Operator-=( item:T )
-	
-		Self.Remove( item )
-	End
-	
-	Operator+=( items:T[] )
-	
-		Self.AddAll( items )
-	End
-	
-End
-
-
-Struct Recti Extension
-	
-	Method MoveTo( x:Int,y:Int )
-		
-		Local size:=Self.Size
-		Self.Origin=New Vec2i( x,y )
-		Self.Size=size
-	End
-	
-	Method MoveBy( dx:Int,dy:Int )
-	
-		Local size:=Self.Size
-		Self.Origin=Self.Origin+New Vec2i( dx,dy )
-		Self.Size=size
-	End
-End
+' iDkP 2025-06-02 UNDONE
+'Class Stack<T> Extension
+'	
+'	Method AddUnique( value:T )
+'		
+'		If Not Self.Contains( value ) Then Self.Add( value )
+'	End
+'	
+'	Operator+=( item:T )
+'		
+'		Self.Add( item )
+'	End
+'	
+'	Operator-=( item:T )
+'	
+'		Self.Remove( item )
+'	End
+'	
+'	Operator+=( items:T[] )
+'	
+'		Self.AddAll( items )
+'	End
+'	
+'End
+'
+'Struct Recti Extension
+'	
+'	Method MoveTo( x:Int,y:Int )
+'		
+'		Local size:=Self.Size
+'		Self.Origin=New Vec2i( x,y )
+'		Self.Size=size
+'	End
+'	
+'	Method MoveBy( dx:Int,dy:Int )
+'	
+'		Local size:=Self.Size
+'		Self.Origin=Self.Origin+New Vec2i( dx,dy )
+'		Self.Size=size
+'	End
+'End
 
 
 Function TypeName<T>:String( obj:T ) Where T Extends Object
