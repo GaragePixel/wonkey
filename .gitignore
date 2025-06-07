@@ -15,9 +15,6 @@
 /bin/*/wide.state.json
 /bin/*/wide*
 
-/devtools/*
-!/devtools/.gitignore
-
 *.products/
 
 /releases/*
