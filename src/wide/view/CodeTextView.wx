@@ -1565,7 +1565,8 @@ Class IndentationHelper Final
 				
 				If isText Or atEnd' end of indentation
 					
-					Local color:=document.Colors[start+k-1]
+					'Local color:=document.Colors[start+k-1]
+					Local color:=document.Colors[start+k] 'modified iDkP
 					
 					' skip comments and strings areas - checking of colors isn't good but works
 					Local skip:=(color=Highlighter.COLOR_COMMENT Or color=Highlighter.COLOR_STRING)
