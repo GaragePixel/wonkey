@@ -290,11 +290,33 @@ Class Map<K,V>
 	#end
 	Method New()
 	End
-	
-	#rem wonkeydoc Gets a node iterator.
-	
-	#end
-	
+
+	#rem wonkeydoc Output an string from the data (map as only string types)
+	@author iDkP from GaragePixel
+	@since 2025-06-13
+	#end	
+	Method To:String() Where K=String And V=String
+		Local result:String
+		For Local item:=Eachin Self
+			result+="["+item.Key+"]["+item.Value+"]"
+		End
+		Return result
+	End 
+
+	#rem wonkeydoc Output an verbose string from the data (map as only string types)
+	@author iDkP from GaragePixel
+	@since 2025-06-13
+	#end	
+	Method ToString:String() Where K=String And V=String
+		Local result:String="map[~n"
+		For Local item:=Eachin Self
+			result+="["+item.Key+"]["+item.Value+"]"
+		End
+		Return result+"]"
+	End
+
+	#rem wonkeydoc Gets a node iterator.	
+	#end	
 	Method All:Iterator()
 		Return New Iterator( FirstNode ) 'Modified by iDkP
 	End
