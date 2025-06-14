@@ -2,7 +2,7 @@ Namespace mojo.input
 #Import "gamecontrollerdb.txt"
 Rem Updated by GaragePixel 2025-06-14
 
-#rem monkeydoc @hidden
+#rem wonkeydoc @hidden
 #end
 Enum GameControllerAxis		'uses SDL values
 	LeftX=0
@@ -13,7 +13,7 @@ Enum GameControllerAxis		'uses SDL values
 	RightTrigger=5
 End
 
-#rem monkeydoc @hidden
+#rem wonkeydoc @hidden
 #end
 Enum GameControllerButton	'uses SDL values
 	A=0
@@ -33,11 +33,11 @@ Enum GameControllerButton	'uses SDL values
 	DpadRight=14
 End
 
-#rem monkeydoc @hidden
+#rem wonkeydoc @hidden
 #end
 Class GameController
 	
-	#rem monkeydoc True if game controller is attached.
+	#rem wonkeydoc True if game controller is attached.
 	#end
 	Property Attached:Bool()
 		
@@ -50,7 +50,7 @@ Class GameController
 		Return False
 	End
 	
-	#rem monkeydoc Name of game controller
+	#rem wonkeydoc Name of game controller
 	#end
 	Property Name:String()
 		
@@ -59,7 +59,7 @@ Class GameController
 		Return SDL_GameControllerName( _sdlcontroller )
 	End
 
-	#rem monkeydoc Gets game controller axis value in the range -1 to 1.
+	#rem wonkeydoc Gets game controller axis value in the range -1 to 1.
 	#end	
 	Method GetAxis:Float( axis:GameControllerAxis )
 		
@@ -68,7 +68,7 @@ Class GameController
 		Return (Float(SDL_GameControllerGetAxis( _sdlcontroller,Cast<SDL_GameControllerAxis>( Int(axis) ) ) )+32768)/32767.5-1
 	End
 	
-	#rem monkeydoc Check up/down state of a game controller button.
+	#rem wonkeydoc Check up/down state of a game controller button.
 	
 	Returns true if button has been pressed since the last call to [[ButtonPressed]].
 	
@@ -80,7 +80,7 @@ Class GameController
 		Return SDL_GameControllerGetButton( _sdlcontroller,Cast<SDL_GameControllerButton>( Int(button) ) )
 	End
 	
-	#rem monkeydoc Gets joystick mapping.
+	#rem wonkeydoc Gets joystick mapping.
 	#end
 	Method GetMapping:String()
 		
@@ -95,7 +95,7 @@ Class GameController
 		Return r
 	End
 	
-	#rem monkeydoc Closes a game controller.
+	#rem wonkeydoc Closes a game controller.
 	#end
 	Method Close()
 		
@@ -105,7 +105,7 @@ Class GameController
 		If Not _refs Discard()
 	End
 	
-	#rem  monkeydoc Adds a GameController mapping.
+	#rem  wonkeydoc Adds a GameController mapping.
 	
 	Returns 1 if mapping added, 0 if mapping updated, -1 if error.
 	
@@ -117,7 +117,7 @@ Class GameController
 		Return SDL_GameControllerAddMapping( mapping )
 	End
 
-	#rem monkeydoc Loads game controller mappings from a file.
+	#rem wonkeydoc Loads game controller mappings from a file.
 	
 	@Returns the number of mappings added.
 
