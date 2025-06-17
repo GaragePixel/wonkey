@@ -49,7 +49,7 @@ Function SaveString:Bool( str:String,path:String,fixeols:Bool=False )
 	Return ok
 End
 
-#rem monkeydoc joins a list of elements into a single string with a specified delimiter
+#rem wonkeydoc joins a list of elements into a single string with a specified delimiter
 @author iDkP from [GaragePixel](https://github.com/GaragePixel)
 @since 2025-05-14
 @param a list of compatible elements (string, integer, float), the custom t must have the operator To.String
@@ -74,7 +74,7 @@ Function StringJoin<T>:String(delimiter:String, items:List<T>)
 	Return result
 End
 
-#rem monkeydoc joins a list of elements into a single string with a specified delimiter
+#rem wonkeydoc joins a list of elements into a single string with a specified delimiter
 @author iDkP from [GaragePixel](https://github.com/GaragePixel)
 @since 2025-05-14
 @param a list of compatible elements (string, integer, float), the custom t must have the operator To.String
@@ -97,7 +97,7 @@ Function StringJoin<T>:String(delimiter:String, items:Stack<T>)
 	Return result
 End
 
-#rem monkeydoc StringToCharArray
+#rem wonkeydoc StringToCharArray
 @author iDkP from [GaragePixel](https://github.com/GaragePixel)
 @since 2025-06-15
 Convert a string like " ", "~n", "~r~n", "~~", "~q", etc. to an array of char codes.
