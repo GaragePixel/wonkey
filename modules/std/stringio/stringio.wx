@@ -106,7 +106,7 @@ Uses StringToULong from stdlib.
 @return an array of Int
 @example
 
-```monkey2
+```wonkey2
 Local delimArr:=StringToCharArray("~r~n")			' Returns [13,10]
 Local delimArr2:=StringToCharArray(" ~n")			' Returns [32,10]
 Local delimArr3:=StringToCharArray("XYZ")			' Returns [88,89,90]
