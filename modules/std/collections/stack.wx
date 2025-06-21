@@ -247,7 +247,14 @@ Class Stack<T> Implements IContainer<T>
 	Property Length:Int() 'iDkP: 32 bits!
 		Return _length
 	End
-	
+
+	#rem wonkeydoc hidden Set the number of values in the stack.
+	Note: This setter is internally used, but public. Do not use it until you know what you do!
+	#end
+	Method SetLength( lenght:Int ) 'iDkP: 32 bits!
+		_length=lenght
+	End
+
 	#rem wonkeydoc Gets the storage capacity of the stack.
 	The capacity of a stack is the number of values it can contain before memory needs to be reallocated to store more values.
 	If a stack's length equals its capacity, then the next Add or Insert operation will need to allocate more memory to 'grow' the stack.
