@@ -780,7 +780,7 @@ Class Stack<T> Implements IContainer<T>
 	@param hi Index of last value to sort.@lo Int start index
 	#end
 	Method Sort( compare:Int( x:T,y:T ),filter:StackSortFilter=Null )
-		Sort( filter,compare,0,Length-1 )
+		Sort( compare,0,Length-1,filter )
 	End
 
 	Method Sort( compare:Int( x:T,y:T ),lo:Int,hi:Int,filter:StackSortFilter=Null ) 'iDkP: lo, hi = 32 bits
@@ -820,7 +820,7 @@ Class Stack<T> Implements IContainer<T>
 			y-=1
 		Until x>y
 
-		Sort( filter,compare,lo,y )
-		Sort( filter,compare,x,hi )
+		Sort( compare,lo,y,filter )
+		Sort( compare,x,hi,filter )
 	End
 End
