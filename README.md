@@ -1,3 +1,4 @@
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/wonkey-coders/wonkey?logo=git&label=commit)](https://github.com/wonkey-coders/wonkey/commits)
 ![Views](https://views.whatilearened.today/views/github/wonkey-coders/wonkey.svg)
 ![windows](https://github.com/wonkey-coders/wonkey/workflows/windows/badge.svg)
 ![linux](https://github.com/wonkey-coders/wonkey/workflows/linux/badge.svg)
