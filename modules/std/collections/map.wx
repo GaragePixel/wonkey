@@ -436,7 +436,7 @@ Class Map<K,V>
 		Next
 	End
 
-	#rem monkeydoc Creates a new map from interleaved key-value pairs (variant array).
+	#rem wonkeydoc Creates a new map from interleaved key-value pairs (variant array).
 	@author iDkP from GaragePixel
 	@since 2025-06-27
 	Creates a map by reading pairs of key and value from a flat Variant[] array.
@@ -449,7 +449,7 @@ Class Map<K,V>
 	#end
 
 #rem TODO: Activate it after TupleKV's integration
-	#rem monkeydoc Creates a map by reading pairs of key and value from an array of TupleKV<K,V>.
+	#rem wonkeydoc Creates a map by reading pairs of key and value from an array of TupleKV<K,V>.
 	@author iDkP from GaragePixel
 	@since 2025-06-27
 	Notes:
@@ -477,7 +477,7 @@ Class Map<K,V>
 		Next
 	End
 
-	#rem monkeydoc Creates a map by reading pairs of key and value from an stack of TupleKV<K,V>.
+	#rem wonkeydoc Creates a map by reading pairs of key and value from an stack of TupleKV<K,V>.
 	@author iDkP from GaragePixel
 	@since 2025-06-30
 	Notes:
