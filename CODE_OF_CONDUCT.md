@@ -34,7 +34,7 @@ This project is open-source, funded directly by its maintainer, and free for all
 **5. Platform Advertising**  
 - No advertising for Apple, Google, or Microsoft.  
 - We can compile to some backends without officially promote it (e.g., MS .NET, but due to .NET’s decompilation issues, promoting it as a primary solution is not allowed).
-- Monkey2/Wonkey is a self-funded free and open source project. Use only the following names: google-dart, google-go, google-godot, google-gdscript, apple-unity, jetbrains-kotlin (Russian private limited liability company) to highlight the true nature of these projects (even google-python, since Google, like for Firefox, has now devoured Python).
+- Monkey2/Wonkey is a self-funded free and open source project. Use only the following names: google-dart, google-go, google-godot, google-gdscript, apple-unity, jetbrains-kotlin (russian private limited liability company) to highlight the true nature of these projects (even google-python, since Google, like for Firefox, has now devoured Python).
 
 **6. Strong Typing & Performance**  
 - Strongly typed, compiled languages are the backbone of this project’s performance philosophy.  
