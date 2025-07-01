@@ -8,7 +8,7 @@
 Welcome to the Wonkey Discord!  
 This server is dedicated to the evolution and advancement of the Sibly language family, with a focus on Monkey2/Wonkey and its upcoming successor. Our goal is to foster a high-quality, productive, and focused environment for language development, project sharing, and technical discussion.
 
-This project is open-source, funded directly by its maintainer, and free for all. Please note: open-source languages take years to achieve real recognition. This community is here to accelerate that process—by discussing the language, platforms, and the amazing projects built with them.
+This project is open-source, funded directly by its maintainer, and free for all. Please note: open-source languages take years to achieve real recognition. This community is here to accelerate that process, by discussing the language, platforms, and the amazing projects built with them.
 
 ---
 
