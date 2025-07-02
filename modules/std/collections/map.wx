@@ -319,8 +319,11 @@ Class Map<K,V>
 		Print "m0 = "+m0
 	#end
 	Method New( keys:K[], prefilled:V ) Where
-										K=Object Or K=String Or
-										K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool
+										K=Object Or 
+										K=String Or
+										K=Int Or K=Float Or 
+										K=Short Or K=Long Or K=Double Or K=Bool Or 
+										K=Variant
 		Local len:=keys.Length
 		For Local k:=0 Until len
 			Add(keys[k],prefilled)
@@ -363,8 +366,8 @@ Class Map<K,V>
 		Print "m2 = "+m2
 	#end
 	Method New( keys:K[], values:V[] ) 	Where 
-										(K=Object Or K=String Or K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool) And
-										(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool)
+										(K=Object Or K=String Or K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool Or K=Variant) And
+										(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool Or V=Variant)
 		Local klen:=keys.Length
 		Local vlen:=values.Length
 		If klen>vlen
@@ -404,7 +407,7 @@ Class Map<K,V>
 		Print "inventory = "+inventory
 	#end
 	Method New( values:V[] ) 	Where
-								(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool) And
+								(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool Or V=Variant) And
 								K=Int '32 bits!
 
 		Local vlen:=values.Length
@@ -425,8 +428,8 @@ Class Map<K,V>
 		Print m 'outputs: {[one][1]}
 	#end
 	Method New( k_v:Variant[] ) 	Where 
-									(K=Object Or K=String Or K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool) And
-									(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool)
+									(K=Object Or K=String Or K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool Or K=Variant) And
+									(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool Or V=Variant)
 		
 		Assert((k_vals.Length Mod 2) = 0,"Pair missing: array length must be even.")
 		Local len:=k_vals.Length/2
@@ -468,8 +471,8 @@ Class Map<K,V>
 	
 	#end
 	Method New( kv:TupleKV<K,V>[] ) 	Where 
-										(K=Object Or K=String Or K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool) And
-										(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool)
+										(K=Object Or K=String Or K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool Or K=Variant) And
+										(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool Or V=Variant)
 		Local len:=kv.Length
 
 		For Local i:=0 Until len
@@ -496,8 +499,8 @@ Class Map<K,V>
 	
 	#end
 	Method New( kv:Stack<TupleKV<K,V>> )	Where 
-											(K=Object Or K=String Or K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool) And
-											(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool)
+											(K=Object Or K=String Or K=Int Or K=Float Or K=Short Or K=Long Or K=Double Or K=Bool Or K=Variant) And
+											(V=Object Or V=String Or V=Int Or V=Float Or V=Short Or V=Long Or V=Double Or V=Bool Or V=Variant)
 		Local len:=kv.Length
 
 		For Local i:=0 Until len
