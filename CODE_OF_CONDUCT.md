@@ -42,7 +42,7 @@ This project is open-source, funded directly by its maintainer, and free for all
 
 **6. Strong Typing & Performance**  
 - Strongly typed, compiled languages are the backbone of this project’s performance philosophy.  
-- Promotion of VM-based, pseudo/scripted languages as “better” than Wonkey is not permitted.
+- Promotion of VM-based, pseudo/scripted languages as “better” than Wonkey is not permitted, even said indirectly.
 
 **7. Respect & Non-violence**  
 - Standard rules of respect, non-violence, and constructive argumentation apply.  
