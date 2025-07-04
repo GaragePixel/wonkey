@@ -56,7 +56,7 @@ This project is open-source, funded directly by its maintainer, and free for all
 - Open discussion of backends/platforms is allowed, as long as Wonkey remains the reference.
 - The ban on VM language promotion isn’t about exclusion, but maintaining clarity on project goals: high-performance, strongly-typed code.
 - Critique is invited, but only if it elevates the discourse: propose, don’t just oppose.
-- The Gold-Book serves as a soft onboarding filter, ensuring newcomers understand and accept these guidelines before participating.
+- The **Gold-Book** serves as a soft onboarding filter, ensuring newcomers understand and accept these guidelines **before participating**.
 
 ---
 
