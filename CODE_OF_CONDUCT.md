@@ -16,7 +16,7 @@ This project is open-source, funded directly by its maintainer, and free for all
 
 **1. Invitation & Access**  
 - Access is by invitation only (for now). Public opening is planned soon.  
-- All new members must sign the guestbook before posting elsewhere.
+- **All new members must sign the guestbook before posting elsewhere**.
 
 **2. Focused Discussion**  
 - The primary topic is Wonkey (and its evolution).  
@@ -29,7 +29,7 @@ This project is open-source, funded directly by its maintainer, and free for all
 
 **4. Technical Critique**  
 - Criticism of technical decisions is welcome iff you propose a concrete alternative or improvement, better: implementation.  
-- Unproductive negativity or vague complaints are not allowed.
+- Unproductive negativity or **vague complaints** are not allowed.
 
 **5. Platform Advertising**  
 - No advertising for apple, google, or microsoft.  
@@ -38,6 +38,7 @@ This project is open-source, funded directly by its maintainer, and free for all
 - Absolutely forbidden to mention the current twitter or posting links to.
 - Always write the names of major companies in lower case as a sign of adherence to R. Stallman's true vision.
 - Monkey2/Wonkey is a self-funded free and open source project. Use only the following names: google-dart, google-go, google-godot, google-gdscript, apple-unity, jetbrains-kotlin (russian private limited liability company) to highlight the true nature of these projects (even google-python, since google, like for Firefox, has now devoured Python).
+- Trying to classify Monkey2 as a language related to the Basic family or, on the contrary, trying to prove that it is not a Basic language is not the purpose of the server and is prohibited.
 
 **6. Strong Typing & Performance**  
 - Strongly typed, compiled languages are the backbone of this project’s performance philosophy.  
