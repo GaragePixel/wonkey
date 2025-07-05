@@ -1,6 +1,10 @@
 
 Namespace std.collections
 
+'#Import "../composites/tuples/tuple2" 'TODO: ToIntegrate
+
+'Using stdlib.types.. 'TODO: ToIntegrate
+
 #rem wonkeydoc Convenience type alias for Stack\<Int\>.
 #end
 Alias IntStack:Stack<Int>
