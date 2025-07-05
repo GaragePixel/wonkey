@@ -757,7 +757,7 @@ Class Stack<T> Implements IContainer<T>
 		result/=Length
 		Return result
 	End
-
+#rem TODO: Tuple inclusion
 	#rem monkeydoc Get the limits of the values in a numerical stack
 	@author iDkP from GaragePixel
 	@since 2025-07-05
@@ -775,7 +775,7 @@ Class Stack<T> Implements IContainer<T>
 		End 
 		Return lim
 	End
-
+#end
 	#rem wonkeydoc Joins the values in a string stack.
 	@param separator The separator to be used when joining values.
 	@return The joined values.
