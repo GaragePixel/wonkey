@@ -3,6 +3,15 @@ Namespace wonkey.types
 
 Extern
 
+#rem
+Author: iDkP from GaragePixe
+Since: 2025-07-09
+	Hierarchy of number representations:
+		INumeric 
+			IIntegral <- ICompact <- IShort
+			IReal 
+#end
+
 #rem wonkeydoc Implemented by numeric types.
 #end
 Interface INumeric
@@ -11,6 +20,20 @@ End
 #rem wonkeydoc Implemented by integral numeric types.
 #end
 Interface IIntegral Extends INumeric
+End
+
+#rem monkeydoc Implemented by compact integral numeric types (less than signed 32 bits).
+@author iDkP from GaragePixe
+@since 2025-07-09
+#end
+Interface ICompact Extends IIntegral
+End
+
+#rem monkeydoc Implemented by short integral numeric types (less than signed 16 bits).
+@author iDkP from GaragePixe
+@since 2025-07-09
+#end
+Interface IShort Extends ICompact
 End
 
 #rem wonkeydoc Implemented by real numeric types.
@@ -25,32 +48,32 @@ End
 
 #rem wonkeydoc Primitive 8 bit byte type.
 #end
-Struct @Byte Implements IIntegral ="wxByte"
+Struct @Byte Implements IShort ="wxByte"
 End
 
 #rem wonkeydoc Primitive 8 bit unsigned byte type.
 #end
-Struct @UByte Implements IIntegral ="wxUByte"
+Struct @UByte Implements IShort ="wxUByte"
 End
 
 #rem wonkeydoc Primitive 16 bit short type.
 #end
-Struct @Short Implements IIntegral ="wxShort"
+Struct @Short Implements IShort ="wxShort"
 End
 
 #rem wonkeydoc Primitive 16 bit unsigned short type.
 #end
-Struct @UShort Implements IIntegral ="wxUShort"
+Struct @UShort Implements IShort ="wxUShort"
 End
 
 #rem wonkeydoc Primitive 32 bit int type.
 #end
-Struct @Int Implements IIntegral ="wxInt"
+Struct @Int Implements ICompact ="wxInt"
 End
 
 #rem wonkeydoc Primitive 32 bit unsigned int type.
 #end
-Struct @UInt Implements IIntegral ="wxUInt"
+Struct @UInt Implements ICompact ="wxUInt"
 End
 
 #rem wonkeydoc Primitive 64 bit long type.
