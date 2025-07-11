@@ -22,7 +22,7 @@ Namespace std
 #Import "collections/map"
 #Import "collections/deque"
 
-#Import "limits/limits"								'NEW (2025) AND INTEGRATED!
+'#Import "limits/limits"								'NEW (2025) AND INTEGRATED!
 
 #Import "resource/resource"
 
