@@ -1,5 +1,5 @@
 
-Namespace stdlib.types.collections
+Namespace std.collections
 
 #rem wonkeydoc The IContainer interface is a 'dummy' interface that container classes should implement for compatibility with Eachin loops.
 
