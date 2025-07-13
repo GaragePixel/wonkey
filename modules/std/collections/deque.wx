@@ -1,19 +1,19 @@
 
 Namespace std.collections
 
-#rem monkeydoc Convenience type alias for Deque\<Int\>.
+#rem wonkeydoc Convenience type alias for Deque\<Int\>.
 #end
 Alias IntDeque:Deque<Int>
 
-#rem monkeydoc Convenience type alias for Deque\<Float\>.
+#rem wonkeydoc Convenience type alias for Deque\<Float\>.
 #end
 Alias FloatDeque:Deque<Float>
 
-#rem monkeydoc Convenience type alias for Deque\<String\>.
+#rem wonkeydoc Convenience type alias for Deque\<String\>.
 #end
 Alias StringDeque:Deque<String>
 
-#rem monkeydoc The Deque class.
+#rem wonkeydoc The Deque class.
 
 A deque is a 'double ended queue' (usually pronounced 'deck').
 
@@ -29,7 +29,7 @@ Please see [[IContainer]] for more information.
 #end
 Class Deque<T> Implements IContainer<T>
 
-	#rem monkeydoc The Deque.Iterator struct.
+	#rem wonkeydoc The Deque.Iterator struct.
 	#end
 	Struct Iterator Implements IIterator<T>
 	
@@ -49,13 +49,13 @@ Class Deque<T> Implements IContainer<T>
 		
 		Public
 		
-		#rem monkeydoc Checks if the iterator has reached the end of the deque.
+		#rem wonkeydoc Checks if the iterator has reached the end of the deque.
 		#end
 		Property AtEnd:Bool()
 			Return _index=_deque._tail
 		End
 		
-		#rem monkeydoc The value currently pointed to by the iterator.
+		#rem wonkeydoc The value currently pointed to by the iterator.
 		#end
 		Property Current:T()
 			AssertCurrent()
@@ -65,7 +65,7 @@ Class Deque<T> Implements IContainer<T>
 			_deque._data[_index]=current
 		End
 		
-		#rem monkeydoc Bumps the iterator so it points to the next value in the deqeue.
+		#rem wonkeydoc Bumps the iterator so it points to the next value in the deqeue.
 		#end
 		Method Bump()
 			AssertCurrent()
@@ -77,7 +77,7 @@ Class Deque<T> Implements IContainer<T>
 			RuntimeError( "Erase not supported for Deques" )
 		End
 		
-		#rem monkeydoc Safely inserts a value before the value pointed to by the iterator.
+		#rem wonkeydoc Safely inserts a value before the value pointed to by the iterator.
 		After calling this method, the iterator will point to the newly added value.
 		#end
 		Method Insert( value:T )
@@ -106,7 +106,7 @@ Class Deque<T> Implements IContainer<T>
 	
 	Public
 
-	#rem monkeydoc Creates a new deque.	
+	#rem wonkeydoc Creates a new deque.	
 	@param length Initalize length of the deque.
 	#end	
 	Method New()
@@ -118,13 +118,13 @@ Class Deque<T> Implements IContainer<T>
 		_data=New T[_tail+1]
 	End
 
-	#rem monkeydoc True if deque is empty.
+	#rem wonkeydoc True if deque is empty.
 	#end
 	Property Empty:Bool()
 		Return _head=_tail
 	End
 
-	#rem monkeydoc Gets the storage capacity of the deque.	
+	#rem wonkeydoc Gets the storage capacity of the deque.	
 	The capacity of a deque is the number of values it can contain before 
 	memory needs to be reallocated to store more values.	
 	If a deque's length equals its capacity, then the next Add or Insert operation will need 
@@ -139,7 +139,7 @@ Class Deque<T> Implements IContainer<T>
 		Return _data.Length
 	End
 	
-	#rem monkeydoc Gets the number of values in the deque.	
+	#rem wonkeydoc Gets the number of values in the deque.	
 	@return The number of values in the deque.	
 	#end
 	Property Length:Int()
@@ -147,7 +147,7 @@ Class Deque<T> Implements IContainer<T>
 		Return Capacity-_head+_tail
 	End
 
-	#rem monkeydoc Gets the underlying array used by the deque.	
+	#rem wonkeydoc Gets the underlying array used by the deque.	
 	Note that the returned array may be longer than the deque length.	
 	@return The array used internally by the deque.	
 	#end
@@ -160,7 +160,7 @@ Class Deque<T> Implements IContainer<T>
 		Return _data
 	End
 	
-	#rem monkeydoc Gets an iterator for visiting deque values.	
+	#rem wonkeydoc Gets an iterator for visiting deque values.	
 	Returns an iterator suitable for use with Eachin, or for manual iteration.	
 	@return A deque iterator.	
 	#end
@@ -169,7 +169,7 @@ Class Deque<T> Implements IContainer<T>
 		Return New Iterator( Self,_head )
 	End
 	
-	#rem monkeydoc Converts the deque to an array.	
+	#rem wonkeydoc Converts the deque to an array.	
 	@return An array containing each element of the deque.	
 	#end
 	Method ToArray:T[]()
@@ -187,7 +187,7 @@ Class Deque<T> Implements IContainer<T>
 		Return data
 	End
 	
-	#rem monkeydoc Reserves deque storage capacity.
+	#rem wonkeydoc Reserves deque storage capacity.
 	
 	The capacity of a deque is the number of values it can contain before memory needs to be reallocated 
 	to store more values.
@@ -208,7 +208,7 @@ Class Deque<T> Implements IContainer<T>
 		Normalize( capacity )
 	End
 	
-	#rem monkeydoc Clears the deque.
+	#rem wonkeydoc Clears the deque.
 	#end
 	Method Clear()
 		If _head<=_tail
@@ -227,7 +227,7 @@ Class Deque<T> Implements IContainer<T>
 		_tail=0
 	End
 	
-	#rem monkeydoc Adds a value at the start of the deque.
+	#rem wonkeydoc Adds a value at the start of the deque.
 	#end
 	Method AddFirst( value:T )
 		If Length+1=Capacity Reserve( Capacity+1 )
@@ -237,7 +237,7 @@ Class Deque<T> Implements IContainer<T>
 		_data[_head]=value
 	End
 	
-	#rem monkeydoc Adds a value at the end of the deque.
+	#rem wonkeydoc Adds a value at the end of the deque.
 	#end
 	Method AddLast( value:T )
 		If Length+1=Capacity Reserve( Capacity+1 )
@@ -247,21 +247,21 @@ Class Deque<T> Implements IContainer<T>
 		If _tail=Capacity _tail=0
 	End
 	
-	#rem monkeydoc @sugar Use [[AddFirst]]
+	#rem wonkeydoc @sugar Use [[AddFirst]]
 	#end
 	Method PushFirst( value:T )
 	
 		AddFirst( value)
 	End
 
-	#rem monkeydoc @sugar Use [[AddLast]]
+	#rem wonkeydoc @sugar Use [[AddLast]]
 	#end
 	Method PushLast( value:T )
 	
 		AddLast( value)
 	End
 
-	#rem monkeydoc Push a value into the deque, the deque do not growth.
+	#rem wonkeydoc Push a value into the deque, the deque do not growth.
 	@author iDkP from GaragePixel
 	@since 2025-07-10
 	#end
@@ -272,7 +272,7 @@ Class Deque<T> Implements IContainer<T>
 		PushFirst( value )
 	End
 	
-	#rem monkeydoc Removes and returns the first value in a deque.	
+	#rem wonkeydoc Removes and returns the first value in a deque.	
 	In debug builds, a runtime error will occur if the deque is empty.	
 	#end
 	Method RemoveFirst:T()
@@ -285,7 +285,7 @@ Class Deque<T> Implements IContainer<T>
 		Return value
 	End
 	
-	#rem monkeydoc Removes and returns the last value in a deque.
+	#rem wonkeydoc Removes and returns the last value in a deque.
 	In debug builds, a runtime error will occur if the deque is empty.
 	#end
 	Method RemoveLast:T()
@@ -298,21 +298,21 @@ Class Deque<T> Implements IContainer<T>
 		Return value
 	End
 	
-	#rem monkeydoc @sugar use [[RemoveFirst]].
+	#rem wonkeydoc @sugar use [[RemoveFirst]].
 	#end
 	Method PopFirst:T()
 	
 		Return RemoveFirst()
 	End
 
-	#rem monkeydoc @sugar use [[RemoveLast]].
+	#rem wonkeydoc @sugar use [[RemoveLast]].
 	#end
 	Method PopLast:T()
 	
 		Return RemoveLast()
 	End
 	
-	#rem monkeydoc Returns the first value in the deque.
+	#rem wonkeydoc Returns the first value in the deque.
 	In debug builds, a runtime error will occur if the deque is empty.
 	#end
 	Method First:T()
@@ -321,7 +321,7 @@ Class Deque<T> Implements IContainer<T>
 		Return _data[_head]
 	End
 	
-	#rem monkeydoc Returns the last value in the deque.
+	#rem wonkeydoc Returns the last value in the deque.
 	In debug builds, a runtime error will occur if the deque is empty.
 	#end
 	Method Last:T()
@@ -330,7 +330,7 @@ Class Deque<T> Implements IContainer<T>
 		Return _data[ _tail>0 ? _tail-1 Else Capacity-1 ]
 	End
 	
-	#rem monkedoc Gets the value of a deque element.	
+	#rem wonkeydoc Gets the value of a deque element.	
 	In debug builds, a runtime error will occur if `index` is less than 0, 
 	or greater than or equal to the length of the deque.	
 	#end
@@ -340,7 +340,7 @@ Class Deque<T> Implements IContainer<T>
 		Return _data[ (index+_head) Mod Capacity ]
 	End
 	
-	#rem monkedoc Sets the value of a deque element.
+	#rem wonkeydoc Sets the value of a deque element.
 	In debug builds, a runtime error will occur if `index` is less than 0, 
 	or greater than or equal to the length of the deque.	
 	#end
@@ -350,7 +350,7 @@ Class Deque<T> Implements IContainer<T>
 		_data[ (index+_head) Mod Capacity ]=value
 	End
 	
-	#rem monkedoc Gets the value of a deque element.
+	#rem wonkeydoc Gets the value of a deque element.
 	In debug builds, a runtime error will occur if `index` is less than 0, 
 	or greater than or equal to the length of the deque.	
 	#end
@@ -360,7 +360,7 @@ Class Deque<T> Implements IContainer<T>
 		Return _data[ (index+_head) Mod Capacity ]
 	End
 	
-	#rem monkedoc Sets the value of a deque element.
+	#rem wonkeydoc Sets the value of a deque element.
 	In debug builds, a runtime error will occur if `index` is less than 0, 
 	or greater than or equal to the length of the deque.
 	#end
@@ -372,8 +372,17 @@ Class Deque<T> Implements IContainer<T>
 	
 	'iDkP's Note:
 	'	_data (the array), _head (record) and _tail (read) need to be
-	'	accessed by friend classes (within the same namespace)
-	Protected 'Private 'Modified by iDkP from GaragePixel (2025-07-10)
+	'	accessed by friend classes
+	
+	Property Tail:Int()
+		Return _tail
+	End
+
+	Property Head:Int()
+		Return _head
+	End
+	
+	Private
 
 	Field _data:T[]
 	Field _head:Int
