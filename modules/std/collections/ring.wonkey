@@ -15,11 +15,20 @@ Alias Ring8<T>:RingB<T,UByte> 	'can contains 255 elements '231?
 Alias Ring16<T>:RingB<T,UShort> 'can contains 16384 elements
 Alias Ring32<T>:RingB<T,Int>  	'can contains 2147483647 elements
 
-#rem monkeydoc The Ring class - A fixed-size circular buffer wrapper over Deque<T>.
+#rem wonkeydoc The Ring class - A fixed-size circular buffer wrapper over Deque<T>.
 @author iDkP from GaragePixel
 @since 2025-07-11
 A Ring is a fixed-capacity circular buffer that automatically overwrites the oldest elements 
 when new elements are added beyond capacity.
+The Ring class implements a fixed-size circular buffer with LIFO (Last In, First Out) semantics, 
+while the Deque implements a dynamic double-ended queue with FIFO capabilities. 
+
+- Ring expected behavior (LIFO):
+Push(0), Push(1), Push(2) → Iterator yields: 2, 1, 0
+	
+- Deque behavior (FIFO):
+AddLast(0), AddLast(1), AddLast(2) → Iterator yields: 0, 1, 2
+
 Rings are ideal for streaming data, logging systems, and any scenario where you need 
 a bounded memory footprint with automatic oldest-element eviction.
 The Ring internally uses a Deque<T> for efficient O(1) operations at both ends 
@@ -27,7 +36,7 @@ while enforcing strict capacity constraints.
 #end
 Class RingB<T,B> Implements IContainerB<T,B> Where B Implements IShort Or B Implements ICompact
 
-	#rem monkeydoc The Ring.Iterator struct.
+	#rem wonkeydoc The Ring.Iterator struct.
 	#end
 	Struct Iterator Implements IIteratorB<T,B>
 	
@@ -35,25 +44,28 @@ Class RingB<T,B> Implements IContainerB<T,B> Where B Implements IShort Or B Impl
 		
 		Field _ring:RingB
 		Field _index:Int
+		Field _count:Int
 		
 		Public
 		
 		Method AssertCurrent()
-			DebugAssert( _index<>_ring.Data.Tail,"Invalid ring iterator" )
+			DebugAssert( Not AtEnd, "Invalid ring iterator" )
 		End
 		
 		Method New( ring:RingB,index:B )
-			_ring=ring
-			_index=index
+			_ring = ring
+			_count = 0
+			_index = _ring.Data.Tail
+			If _index = 0 _index = _ring.Capacity - 1 Else _index -= 1
 		End
 		
-		#rem monkeydoc Checks if the iterator has reached the end of the ring.
+		#rem wonkeydoc Checks if the iterator has reached the end of the ring.
 		#end
 		Property AtEnd:Bool()
-			Return _index=_ring.Data.Tail
+			Return _count >= _ring.Length-1
 		End
 		
-		#rem monkeydoc The value currently pointed to by the iterator.
+		#rem wonkeydoc The value currently pointed to by the iterator.
 		#end
 		Property Current:T()
 			AssertCurrent()
@@ -63,19 +75,19 @@ Class RingB<T,B> Implements IContainerB<T,B> Where B Implements IShort Or B Impl
 			_ring.Data[_index]=current
 		End
 		
-		#rem monkeydoc Bumps the iterator so it points to the next value in the ring.
+		#rem wonkeydoc Bumps the iterator so it points to the next value in the ring.
 		#end
 		Method Bump()
 			AssertCurrent()
-			_index+=1
-			If _index=_ring.Capacity _index=0
+			_count+=1
+			_index = (_index - 1 + _ring.Capacity) Mod _ring.Capacity
 		End
 		
 		Method Erase()
 			RuntimeError( "Erase not supported for Rings" )
 		End
 		
-		#rem monkeydoc Safely inserts a value before the value pointed to by the iterator.
+		#rem wonkeydoc Safely inserts a value before the value pointed to by the iterator.
 		After calling this method, the iterator will point to the newly added value.
 		#end
 		Method Insert( value:T )
@@ -103,12 +115,13 @@ Class RingB<T,B> Implements IContainerB<T,B> Where B Implements IShort Or B Impl
 		Return _data.Empty
 	End
 
-	#rem monkeydoc Gets an iterator for visiting ring values.	
+	#rem wonkeydoc Gets an iterator for visiting ring values.	
 	Returns an iterator suitable for use with Eachin, or for manual iteration.	
 	@return A ring iterator.	
 	#end
 	Method All:Iterator()
-		Return New Iterator( Self,_data.Head )
+		'Return New Iterator( Self,_data.Head )
+		Return New Iterator( Self,_data.Tail )
 	End
 	
 	Method Push( value:T )
@@ -136,10 +149,10 @@ Class RingB<T,B> Implements IContainerB<T,B> Where B Implements IShort Or B Impl
 		Init( _capacity )
 	End
 	
-	Property Counts:Bool()
-		Return stdlib.types.bools.All(_data)
-		'Return _data.Length=0? True Else False
-	End	
+'	Property Counts:Bool()
+'		Return stdlib.types.bools.All(_data)
+'		'Return _data.Length=0? True Else False
+'	End	
 	
 	Method Pop:T()
 		Return _data.RemoveFirst()
