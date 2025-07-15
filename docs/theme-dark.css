@@ -1,32 +1,32 @@
 /*	
-	This stylesheet changes wonkeydocs from default white to dark blue with yellow links
+	This stylesheet changes monkeydocs from default white to dark blue with blue links
 	To make docss use white theme, rename or delete this stylesheet.
-	To chnange docs theme, change the colors below.
+	To change docs theme, change the colors below.
 	If you find something that needs adding, add it to the correct color group, sperating with a commma
  */
 
 
 /* main background color */
 body{
-	background-color: #123;
+	background-color: #222;
 }
 /* text color */
 body,pre,code{
-	color: #fff;
+	color: #ccc;
 }
 /* link color */
 a , a:hover, a:visited , a:active {
-	color: #ec0;
+	color: #4ef;
 }
 /* table header and <pre> background */
 pre,th ,code{
-	background: #456;
+	background: #444;
 }
 
 tr:nth-child(even){
-	background: #182838;
+	background: #333;
 }
 
 tr:nth-child(odd){
-	background: #1e2e3e;
+	background: #222;
 }
