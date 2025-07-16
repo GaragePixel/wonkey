@@ -1,0 +1,5 @@
+
+Namespace std.types
+
+#Import "word"
+#Import "dword"

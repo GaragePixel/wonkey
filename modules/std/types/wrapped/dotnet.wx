@@ -1,5 +1,0 @@
-
-Namespace std.types
-
-#Import "word.xw"
-#Import "dword.xw"
