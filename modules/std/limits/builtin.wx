@@ -23,7 +23,7 @@ Namespace std.limits
 | LongLong| 128  | Yes    | Yes            | (Not standard type) | 
 #end
 
-'Using monkey.types
+Using monkey.types
 
 ' Uppercase constants are only for the Built-in datatypes
 
