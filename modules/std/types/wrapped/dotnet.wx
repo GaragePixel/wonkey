@@ -1,5 +1,5 @@
 
 Namespace std.types
 
-#Import "word.xw"
-#Import "dword.xw"
+#Import "word"
+#Import "dword"
