@@ -27,8 +27,6 @@ Missing or possible extensions:
 	- Sliding window: Windowed views for DSP, stats, ML.
 
 Summary:
-	- For core permutations, copying, and pattern generation, your library is **complete and even advanced**.
-	- For full "batteries-included" status, add functional, searching, set, and chunking utilities.
 	- For most projects—especially graphics, DSP, procedural, and systems—it is already a **top-tier array toolkit**.
 	- Documentation and naming make it both accessible and powerful.
 #end 
