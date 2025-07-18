@@ -1,7 +1,7 @@
 
 Namespace std.syntax
 
-#rem monkeydoc @pro Assigns something if not null.
+#rem wonkeydoc @pro Assigns something if not null.
 @author iDkP from GagagePixel
 @since 2025-07-18
 If callback_NotNull is null, target's value is left intact
@@ -13,7 +13,7 @@ Function AssignIf<T>( callback_NotNull:T(),target:T Ptr )
 	If result target[0] = result
 End 
 
-#rem monkeydoc @pro Assigns something if not null or false.
+#rem wonkeydoc @pro Assigns something if not null or false.
 @author iDkP from GagagePixel
 @since 2025-07-18
 If callback_NotNull is null or false, target's value is left intact
