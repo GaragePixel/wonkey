@@ -844,7 +844,7 @@ Class Map<K,V>
 		Return Null
 	End
 
-	#rem monkeydoc Search if a contained value exists as the value of a key.
+	#rem wonkeydoc Search if a contained value exists as the value of a key.
 	@author iDkP from GaragePixel
 	@since 2025-07-18
 	@param key The key.
