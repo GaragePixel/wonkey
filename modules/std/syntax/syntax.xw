@@ -13,6 +13,7 @@ Namespace std.syntax
 #Import "pointers/pointers"
 
 #Import "funcs/reflection"
+#Import "funcs/minmax"
 #Import "funcs/swaps"
 #Import "funcs/clippers/clips"
 #Import "funcs/clippers/trims"
