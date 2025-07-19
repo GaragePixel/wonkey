@@ -4,6 +4,7 @@ Namespace std.syntax
 #rem MiniLibrary: Arrays
 Since 2021? - 2025-02-02 - 2025-06-19 - 2025-06-21 (Aida 4)
 Author: iDkP from GaragePixel
+#end
 
 List of functionality:
 	- Copying (CopyTo for inlined usage)
@@ -16,6 +17,7 @@ List of functionality:
 	- Aggregation: Sum, Min, Max with inverse step, Average
 	- Clamp/Clip: Bound all elements to a range
 	- Chunking/Splitting: Split into fixed-size blocks
+	- Sliding window: Windowed views for DSP, stats, ML
 
 TODO:
 A test To know which one is the faster:
@@ -26,7 +28,6 @@ Missing or possible extensions:
 	- Set operations: Union, Intersection, Difference, Unique/Distinct
 	- Chunking/Splitting: group by predicate
 	- Flatten/Concat: For arrays-of-arrays
-	- Sliding window: Windowed views for DSP, stats, ML
 	- Reorganize the file, it's crappy actually
 
 Possible application fields:
@@ -36,110 +37,6 @@ Possible application fields:
 Completion:
 	- For full "batteries-included" status, add functional, searching, set, and chunking utilities.
 #end
-
-'TO TEST:
-Function SlidingRead<T,ChunkFormat>( 	this:T[],
-	
-										'data to write into:
-											data:T Ptr,
-	
-										'dimension x,y of the unidimensional array:
-											length:ChunkFormat Ptr,
-											height:ChunkFormat Ptr,
-													
-										'position of the window:
-											offsetX:UInt,
-											offsetY:UInt,
-											offsetLength:ChunkFormat,
-											offsetHeight:ChunkFormat,
-													
-										'Pointer in the window:
-											ptrX:UInt,
-											ptrY:UInt	)
-	
-	'Return the content
-	data[0]=this[	SlidingGetPtr(	Varptr(length),
-									Varptr(height),
-											
-									Varptr(offsetX),
-									Varptr(offsetY),
-									Varptr(offsetLength),
-									Varptr(offsetHeight),
-										
-									Varptr(ptrX),
-									Varptr(ptrY))	]
-End
-
-'TO TEST:
-Function SlidingWrite<T,ChunkFormat>( 	this:T[],
-	
-										'data to write/set:
-											data:T Ptr,
-	
-										'dimension x,y of the unidimensional array:
-											length:ChunkFormat Ptr,
-											height:ChunkFormat Ptr,
-													
-										'position of the window:
-											offsetX:UInt,
-											offsetY:UInt,
-											offsetLength:ChunkFormat,
-											offsetHeight:ChunkFormat,
-													
-										'Pointer in the window:
-											ptrX:UInt,
-											ptrY:UInt	)
-	
-	'Return the content
-	data[0]=this[	SlidingGetPtr(	Varptr(length),
-									Varptr(height),
-											
-									Varptr(offsetX),
-									Varptr(offsetY),
-									Varptr(offsetLength),
-									Varptr(offsetHeight),
-										
-									Varptr(ptrX),
-									Varptr(ptrY))	]
-End
-
-Private 'Get a pointer for read/write in a virtual 2d array from a sliding window
-Function SlidingGetPtr<T,ChunkFormat>:ChunkFormat Ptr( 	this:T[],
-	
-														'dimension x,y of the unidimensional array:
-															length:ChunkFormat Ptr,
-															height:ChunkFormat Ptr,
-																					
-														'position of the window:
-															offsetX:UInt Ptr,
-															offsetY:UInt Ptr,
-															offsetLength:ChunkFormat Ptr,
-															offsetHeight:ChunkFormat Ptr,
-																					
-														'Pointer in the window:
-															ptrX:UInt Ptr,
-															ptrY:UInt Ptr	)
-
-	'The pointer is inside the window
-	ptrX[0]=ptrX[0]>offsetLength[0] ? offsetLength[0] Else ptrX[0] 'guard
-	ptrY[0]=ptrY[0]>offsetHeight[0] ? offsetHeight[0] Else ptrY[0] 'guard
-	
-	'The window is inside the 2d array
-	offsetX[0]=offsetX[0]<=length[0]-offsetLength[0] ? offsetX[0] Else length[0]-offsetLength[0] 'guard, here <= avoids sub (edge case)
-	offsetY[0]=offsetY[0]<=height[0]-offsetHeight[0] ? offsetY[0] Else height[0]-offsetHeight[0] 'guard, here <= avoids sub (edge case)
-	
-	'Shift the pointer inside the 2d array
-	ptrX[0]+=offsetX[0]
-	ptrY[0]+=offsetY[0]
-	
-	'Pointer from 2d array to 1d array
-	ptrY[0]*=length[0]-1
-	ptrX[0]+=ptrY[0]
-	
-	'Return the content
-	Return ptrX
-End
-Public
 
 'TO TEST:
 Function Splitting<T>:T[][]( this:T[],chunksLength:Int )
