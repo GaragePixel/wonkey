@@ -4,6 +4,7 @@ Namespace stdlib.syntax
 #rem MiniLibrary: Arrays slicing window
 Since 2025-07-20 (Aida 4)
 Author: iDkP from GaragePixel
+#end
 
 'Extract (copy) and virtual 2d array window
 Function SlidingExtract<T,ChunkFormat>(	src:T[], 'The source
